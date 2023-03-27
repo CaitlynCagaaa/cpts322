@@ -58,7 +58,7 @@ namespace TeamVaxxers
             this.displayBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.displayBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.displayBtn.Location = new System.Drawing.Point(258, 116);
+            this.displayBtn.Location = new System.Drawing.Point(241, 74);
             this.displayBtn.Margin = new System.Windows.Forms.Padding(2);
             this.displayBtn.Name = "displayBtn";
             this.displayBtn.Size = new System.Drawing.Size(132, 30);
@@ -89,63 +89,63 @@ namespace TeamVaxxers
             // removeCarBtn
             // 
             this.removeCarBtn.ForeColor = System.Drawing.Color.Black;
-            this.removeCarBtn.Location = new System.Drawing.Point(203, 154);
+            this.removeCarBtn.Location = new System.Drawing.Point(58, 171);
             this.removeCarBtn.Name = "removeCarBtn";
-            this.removeCarBtn.Size = new System.Drawing.Size(75, 23);
+            this.removeCarBtn.Size = new System.Drawing.Size(114, 23);
             this.removeCarBtn.TabIndex = 0;
             this.removeCarBtn.Text = "remove car";
             // 
             // addCarBtn
             // 
             this.addCarBtn.ForeColor = System.Drawing.Color.Black;
-            this.addCarBtn.Location = new System.Drawing.Point(437, 200);
+            this.addCarBtn.Location = new System.Drawing.Point(58, 134);
             this.addCarBtn.Name = "addCarBtn";
-            this.addCarBtn.Size = new System.Drawing.Size(75, 23);
+            this.addCarBtn.Size = new System.Drawing.Size(114, 23);
             this.addCarBtn.TabIndex = 0;
             this.addCarBtn.Text = "add car";
             // 
             // removeBeaconBtn
             // 
             this.removeBeaconBtn.ForeColor = System.Drawing.Color.Black;
-            this.removeBeaconBtn.Location = new System.Drawing.Point(315, 154);
+            this.removeBeaconBtn.Location = new System.Drawing.Point(58, 89);
             this.removeBeaconBtn.Name = "removeBeaconBtn";
-            this.removeBeaconBtn.Size = new System.Drawing.Size(75, 23);
+            this.removeBeaconBtn.Size = new System.Drawing.Size(114, 23);
             this.removeBeaconBtn.TabIndex = 0;
             this.removeBeaconBtn.Text = "remove beacon";
             // 
             // addBeaconBtn
             // 
             this.addBeaconBtn.ForeColor = System.Drawing.Color.Black;
-            this.addBeaconBtn.Location = new System.Drawing.Point(97, 154);
+            this.addBeaconBtn.Location = new System.Drawing.Point(58, 45);
             this.addBeaconBtn.Name = "addBeaconBtn";
-            this.addBeaconBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBeaconBtn.Size = new System.Drawing.Size(114, 23);
             this.addBeaconBtn.TabIndex = 0;
             this.addBeaconBtn.Text = "add Beacon";
             // 
             // modifyBtn
             // 
             this.modifyBtn.ForeColor = System.Drawing.Color.Black;
-            this.modifyBtn.Location = new System.Drawing.Point(315, 200);
+            this.modifyBtn.Location = new System.Drawing.Point(58, 293);
             this.modifyBtn.Name = "modifyBtn";
-            this.modifyBtn.Size = new System.Drawing.Size(75, 23);
+            this.modifyBtn.Size = new System.Drawing.Size(158, 23);
             this.modifyBtn.TabIndex = 0;
             this.modifyBtn.Text = "connect beacon and car";
             // 
             // swapBeaconBtn
             // 
             this.swapBeaconBtn.ForeColor = System.Drawing.Color.Black;
-            this.swapBeaconBtn.Location = new System.Drawing.Point(97, 200);
+            this.swapBeaconBtn.Location = new System.Drawing.Point(58, 200);
             this.swapBeaconBtn.Name = "swapBeaconBtn";
-            this.swapBeaconBtn.Size = new System.Drawing.Size(75, 23);
+            this.swapBeaconBtn.Size = new System.Drawing.Size(114, 23);
             this.swapBeaconBtn.TabIndex = 0;
             this.swapBeaconBtn.Text = "swap beacons";
             // 
             // swapCarBtn
             // 
             this.swapCarBtn.ForeColor = System.Drawing.Color.Black;
-            this.swapCarBtn.Location = new System.Drawing.Point(203, 200);
+            this.swapCarBtn.Location = new System.Drawing.Point(58, 240);
             this.swapCarBtn.Name = "swapCarBtn";
-            this.swapCarBtn.Size = new System.Drawing.Size(75, 23);
+            this.swapCarBtn.Size = new System.Drawing.Size(114, 23);
             this.swapCarBtn.TabIndex = 0;
             this.swapCarBtn.Text = "swap cars";
             // 
@@ -212,7 +212,7 @@ namespace TeamVaxxers
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer2.Size = new System.Drawing.Size(774, 452);
-            this.splitContainer2.SplitterDistance = 238;
+            this.splitContainer2.SplitterDistance = 339;
             this.splitContainer2.TabIndex = 6;
             // 
             // vScroller

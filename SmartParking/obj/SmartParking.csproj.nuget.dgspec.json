@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\projects\\SP\\SmartParking\\SmartParking.csproj": {}
+    "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\cpts322\\SmartParking\\SmartParking.csproj": {}
   },
   "projects": {
-    "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\projects\\SP\\SmartParking\\SmartParking.csproj": {
+    "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\cpts322\\SmartParking\\SmartParking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\projects\\SP\\SmartParking\\SmartParking.csproj",
+        "projectUniqueName": "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\cpts322\\SmartParking\\SmartParking.csproj",
         "projectName": "SmartParking",
-        "projectPath": "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\projects\\SP\\SmartParking\\SmartParking.csproj",
+        "projectPath": "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\cpts322\\SmartParking\\SmartParking.csproj",
         "packagesPath": "C:\\Users\\caitl\\.nuget\\packages\\",
-        "outputPath": "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\projects\\SP\\SmartParking\\obj\\",
+        "outputPath": "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\cpts322\\SmartParking\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [

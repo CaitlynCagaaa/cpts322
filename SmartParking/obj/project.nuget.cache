@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GYMyAOpiJJRKqeD+kJEmRXrpHTEDN03UyCmk8LKbXye8G0p4+PnYUN7opFEhJqG7KxNRH6MRD7UG8mErvYESJQ==",
+  "dgSpecHash": "JDTwbWj4G1tN9ZJpbw16N8Vv7XROJxo4Ij6oq2JoTK0rGZCswNs43Lo8Vt842S2czb1f3+YtnVxnHtnqWwqNcg==",
   "success": true,
-  "projectFilePath": "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\projects\\SP\\SmartParking\\SmartParking.csproj",
+  "projectFilePath": "D:\\schoolfiles\\computer science\\MinGW\\msys\\1.0\\home\\caitl\\cpts322\\SmartParking\\SmartParking.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\caitl\\.nuget\\packages\\firebasedatabase.net\\4.0.7\\firebasedatabase.net.4.0.7.nupkg.sha512",
     "C:\\Users\\caitl\\.nuget\\packages\\gmap.net.windowsforms\\1.7.5\\gmap.net.windowsforms.1.7.5.nupkg.sha512",
