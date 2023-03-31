@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 
 
+
+
 namespace TeamVaxxers
 {
     internal static class Program
@@ -12,6 +14,7 @@ namespace TeamVaxxers
         [STAThread]
         static void Main()
         {
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());

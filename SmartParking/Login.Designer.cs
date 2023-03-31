@@ -1,4 +1,5 @@
-﻿namespace TeamVaxxers
+﻿
+namespace TeamVaxxers
 {
     partial class Login
     {

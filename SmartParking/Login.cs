@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
+using Firebase.Database;
+using Firebase.Database.Query;
 namespace TeamVaxxers
 {
     public partial class Login : Form
@@ -9,26 +11,57 @@ namespace TeamVaxxers
         {
             InitializeComponent();
         }
-
-      
-
-
-        private void loginBtn_Click_1(object sender, EventArgs e)
+        private async void getUserDataAsync(string name, string pws) // grabs population from database 
         {
-            User user = new User();
-            if (user.UserName == usernameBox.Text && user.Password == passwordBox.Text)
-            {
-                this.Hide();
-                ParkingLot engine = new ParkingLot();
-                engine.ShowDialog();
-                this.Close();
+            FirebaseClient client = new FirebaseClient("https://parking-database-481d2-default-rtdb.firebaseio.com/");
+            //Users userSet = await client
+            // .Child("Users/")//Prospect list
+            //.OnceSingleAsync<Users>();
 
-            }
-            else
+            
+
+
+
+        }
+
+
+
+
+            private void loginBtn_Click_1(object sender, EventArgs e)
             {
-                label.Text = "Wrong Username or Password";
-                usernameBox.Text = passwordBox.Text = "";
-            }
+            //getUserDataAsync(usernameBox.Text, passwordBox.Text);
+                string name = usernameBox.Text;
+                string pws = passwordBox.Text;
+
+                Users userSet = new Users();
+                User temp = new User();
+                temp.level = 1;
+                temp.Password = "pass";
+                temp.UserName = "admin";
+                userSet.data = new User[1];
+                userSet.data[0] = temp;
+
+
+                int checkCred = userSet.validate(name, pws);
+    
+                if (checkCred == 1)
+                {
+                    this.Hide();
+                    User current = new User();
+                    current.UserName = name;
+                    current.Password = pws;
+                    ParkingLot engine = new ParkingLot();
+                    engine.setUser(current);
+                    engine.ShowDialog();
+                    this.Close();
+
+                }
+                else
+                {
+                    label.Text = "Wrong Username or Password";
+                    usernameBox.Text = passwordBox.Text = "";
+                }
+
         }
 
 

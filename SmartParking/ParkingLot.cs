@@ -22,10 +22,15 @@ namespace TeamVaxxers
         FirebaseClient client = new FirebaseClient("https://heymotocarro-1a1d4.firebaseio.com/");
         Graphics G;
         Rectangle[] rect= new Rectangle[6];
+        User current;
         public ParkingLot()
         {
             InitializeComponent();
            // WindowState = FormWindowState.Maximized;
+        }
+        public void setUser(User currUser)
+        {
+            current = currUser;
         }
         private void ParkingLot_Load(object sender, EventArgs e)
         {

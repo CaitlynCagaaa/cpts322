@@ -180,7 +180,7 @@ namespace TeamVaxxers
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer1.Size = new System.Drawing.Size(774, 348);
+            this.splitContainer1.Size = new System.Drawing.Size(791, 348);
             this.splitContainer1.SplitterDistance = 157;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -211,7 +211,7 @@ namespace TeamVaxxers
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer2.Size = new System.Drawing.Size(774, 452);
+            this.splitContainer2.Size = new System.Drawing.Size(791, 452);
             this.splitContainer2.SplitterDistance = 339;
             this.splitContainer2.TabIndex = 6;
             // 
@@ -231,7 +231,7 @@ namespace TeamVaxxers
             this.AutoScrollMargin = new System.Drawing.Size(1, 1);
             this.AutoScrollMinSize = new System.Drawing.Size(1, 1);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(791, 653);
+            this.ClientSize = new System.Drawing.Size(808, 653);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.splitContainer2);
             this.Name = "admin";
