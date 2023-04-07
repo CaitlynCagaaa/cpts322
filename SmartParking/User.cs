@@ -6,7 +6,7 @@
         public string UserName { get; set; }
         
         public int level { get; set; }
-        public long Time { get; set; }
+        
 
         public int changePassword(string old, string newP)
         {
@@ -24,7 +24,7 @@
             
         }
     }
-    internal class Users
+    public class Users
     {
         public int Total { get; set; }
         public User[] data { get; set; }

@@ -18,6 +18,14 @@
         public Beacon[] data { get; set; }
 
     }
+    public class Parking
+    {
+
+    }
+    public class Slots
+    {
+
+    }
    
     public class Response
 

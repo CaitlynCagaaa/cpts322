@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.33423.256
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartParking", "SmartParking\SmartParking.csproj", "{DC907919-EAE5-4C22-86DD-714DE495E2D2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E4B9DEEA-5E8A-4720-8DD6-0EB449A1E40B}"
+	ProjectSection(SolutionItems) = preProject
+		SmartParking\collapse.png = SmartParking\collapse.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

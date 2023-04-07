@@ -23,6 +23,7 @@ namespace TeamVaxxers
         Graphics G;
         Rectangle[] rect= new Rectangle[6];
         User current;
+        Users userList;
         public ParkingLot()
         {
             InitializeComponent();
@@ -31,6 +32,10 @@ namespace TeamVaxxers
         public void setUser(User currUser)
         {
             current = currUser;
+        }
+        public void setUsers(Users currUser)
+        {
+            userList= currUser;
         }
         private void ParkingLot_Load(object sender, EventArgs e)
         {
@@ -122,6 +127,8 @@ namespace TeamVaxxers
         {
             this.Hide();
             admin engine = new admin();
+            engine.setUser(current);
+            engine.setUsers(userList);
             engine.ShowDialog();
             this.Close();
 
