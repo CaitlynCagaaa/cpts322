@@ -1,4 +1,6 @@
-﻿namespace TeamVaxxers
+﻿using System;
+using System.Collections.Generic;
+namespace TeamVaxxers
 {
 
 
@@ -21,12 +23,12 @@
     public class Beacons
     {
         public int Total { get; set; }
-        public Beacon[] data { get; set; }
+        public List<Beacon> data { get; set; }
 
     }
     public class Parking
     {
-        public Slot[] data { get; set; }//should only be 6 slots
+        public List<Slot> data { get; set; }//should only be 6 slots
         public int Total { get; set; }
         public int number;
 
@@ -39,7 +41,7 @@
     public class Slot
     {
 
-        public Point[] vertice { get; set; }//should onyl be 4 points
+        public List<Point> vertice { get; set; }//should onyl be 4 points
         
         public int Total { get; set; }
 
@@ -68,7 +70,7 @@
     }
     public class Sensors
     {
-        public Sensors[] data { get; set; }// should only be 4 sensors
+        public List<Sensor> data { get; set; }// should only be 4 sensors
 
     }
     public class Sensor
@@ -78,7 +80,7 @@
     }
     public class CarList
     {
-        public Car[] data { get; set; }
+        public List<Car> data { get; set; }
         void addCars()
         {
 
@@ -115,19 +117,6 @@
         string plate;
         string owner;
         string color;
-
-    }
-   
-    public class Response
-
-    {
-        public bool success { get; set; }
-        public int index { get; set; }
-        public string message { get; set; }
-        public string received { get; set; }
-        public string companyId { get; set; }
-        public string color { get; set; }
-        public int[] infected { get; set; }
 
     }
 }
