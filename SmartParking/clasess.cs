@@ -12,8 +12,8 @@ namespace TeamVaxxers
         public double D4 { get; set; }
         public long Id { get; set; }
         public long Time { get; set; }
-        string connected;
-        int inside;
+        public string connected;
+        public int inside;
         void trilaterate(Sensors location, Parking slotPos)
         {
 
@@ -24,6 +24,121 @@ namespace TeamVaxxers
     {
         public int Total { get; set; }
         public List<Beacon> data { get; set; }
+
+        int addBeacon(long id)
+        {
+            
+            foreach (var b1 in this.data)
+            {
+                if (b1.Id == id)
+                {
+                    return -1;
+                }
+
+
+            }
+            Total++;
+            Beacon temp = new Beacon();
+            temp.Id = id;
+            temp.connected = null;
+            data.Add(temp);
+            return 0;
+
+
+            
+
+        }
+        int removeBeacon(int id, CarList list)
+        {
+            int i = 0;
+            foreach (var b1 in this.data)
+            {
+                i++;
+                
+                if (b1.Id == id)
+                {
+                    if(b1.connected!=null)
+                    {
+                        foreach( var car1 in list.data)
+                        {
+                            if(b1.connected ==car1.plate)
+                            {
+                                car1.connected = -1;
+                            }
+                        }
+                    }
+                    this.data.Remove(b1);
+                    this.Total--;
+                    return 0;
+                }
+
+
+
+            }
+            return -1;
+
+
+        
+
+    }
+        int modify(long id1, long id2, CarList list)
+        {
+            foreach (var b1 in this.data)
+            {
+                //i++;
+
+                if (b1.Id == id1)
+                {
+                   
+                    foreach (var b2 in this.data)
+                    {
+                        if (b2.Id == id2)
+                        {
+                            string temp = b1.connected;
+                            b1.connected = null;
+                            string temp1 = b2.connected;
+                            b2.connected = null;
+
+                                
+                            foreach (var car1 in list.data)// switch cars id for b1
+                            {
+                                if (temp == car1.plate)
+                                {
+                                    car1.connected = b2.Id;
+                                    b2.connected = temp;
+                                        
+                                }
+                                    
+                            }
+                            foreach (var car1 in list.data)//swirch cars id for b2
+                            {
+                                if (temp1 == car1.plate)
+                                {
+                                    car1.connected = b1.Id;
+                                    b2.connected = temp1;
+
+                                }
+
+                            }
+
+
+                            return 0;
+                        }
+                    }
+
+
+                    return -1;
+                   
+                   
+                }
+
+
+
+            }
+            return -2;
+
+
+        }
 
     }
     public class Parking
@@ -71,6 +186,7 @@ namespace TeamVaxxers
     public class Sensors
     {
         public List<Sensor> data { get; set; }// should only be 4 sensors
+        public int Total;
 
     }
     public class Sensor
@@ -81,42 +197,185 @@ namespace TeamVaxxers
     public class CarList
     {
         public List<Car> data { get; set; }
-        void addCars()
+        public int Total { get; set; }
+        int addCars(string owner, string color, string plate )
         {
+            foreach (var car1 in this.data)
+            {
+                if (car1.plate == plate)
+                {
+                    return -1;
+                }
+
+
+            }
+            Total++;
+            Car temp = new Car();
+            temp.plate = plate;
+            temp.color = color;
+            temp.owner = owner;
+            temp.connected = -1;
+            data.Add(temp);
+            return 0;
+
 
         }
-        void removeCars()
+        int removeCars(string plate, Beacons list)
         {
+            //int i = 0;
+            foreach (var car1 in this.data)
+            {
+                //i++;
+                
+                if (car1.plate == plate)
+                {
+                    if (car1.connected != -1)
+                    {
+                        foreach (var b1 in list.data)
+                        {
+                            if (b1.Id == car1.connected)
+                            {
+                                b1.connected = null;
+                            }
+                        }
+                    }
+                    this.data.Remove(car1);
+                    this.Total--;
+                    return 0;
+                }
+
+
+
+            }
+            return -1;
+
 
         }
-        void addBeacon()
+
+
+
+        int connect(Beacons list, int id, string plate)
         {
+            int check =-1;
+            Car temp;
+            Beacon temp1;
+            foreach (var c1 in this.data)
+            {
+                if(c1.plate==plate)
+                {
+                    check = 1;
+                    
+                    c1.connected = id;
+                }
+               
+
+
+            }
+            if(check==-1)
+            {
+                return -1;
+            }
+            foreach (var b1 in list.data)
+            {
+                if (b1.Id == id)
+                {
+                    check = 1;
+                    b1.connected = plate;
+                    return 0;
+                }
+
+
+
+            }
+        
+            foreach (var c1 in this.data)//if beacon doesnt exist turn connected back to -1
+            {
+                if (c1.plate == plate)
+                {
+                        
+
+                    c1.connected = -1;
+                }
+
+
+
+            }
+
+            return -2;
+            
+            
+
 
         }
-        void connect(Beacons list, int id, string plate)
+       
+        int modify(Beacons list, string plate1, string plate2 )
         {
+            foreach (var c1 in this.data)
+            {
+                //i++;
 
-        }
-        void connect(int id)
-        {
+                if (c1.plate == plate1)
+                {
 
-        }
-        void modifyB(int id1, int id2)
-        {
+                    foreach (var c2 in this.data)
+                    {
+                        if (c2.plate == plate2)
+                        {
+                            long temp = c1.connected;
+                            c1.connected = -1;
+                            long temp1 = c2.connected;
+                            c2.connected = -1;
 
-        }
-        void modifyC(string plate1, string plate2 )
-        {
+
+                            foreach (var beacon in list.data)// switch cars id for b1
+                            {
+                                if (temp == beacon.Id)
+                                {
+                                    beacon.connected = c1.plate;
+                                    c2.connected = temp;
+
+                                }
+
+                            }
+                            foreach (var beacon in list.data)//swirch cars id for b2
+                            {
+                                if (temp1 == beacon.Id)
+                                {
+                                    beacon.connected = c2.plate;
+                                    c1.connected = temp1;
+
+                                }
+
+                            }
+
+
+                            return 0;
+                        }
+                    }
+
+
+                    return -1;
+
+
+                }
+
+
+
+            }
+            return -2;
+
 
         }
 
     }
+
+    
     public class Car
     {
-        Beacon connected;
-        string plate;
-        string owner;
-        string color;
+       public  long connected;
+        public string plate;
+        public string owner;
+        public string color;
 
     }
 }
