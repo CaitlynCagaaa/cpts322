@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Firebase.Database;
+using Firebase.Database.Query;
 
 namespace TeamVaxxers
 {
@@ -9,6 +11,7 @@ namespace TeamVaxxers
         Graphics G;
         User current;
         Users userList;
+        FirebaseClient client = new FirebaseClient("https://parking-lot-f206b-default-rtdb.firebaseio.com");
         public admin()
         {
             InitializeComponent();
@@ -38,6 +41,13 @@ namespace TeamVaxxers
             }
             
         }
+        private async void addUserFirebase()// assumption that the userlist in firebase is not changed from firebase, at least while program is running 
+        {
+            await client
+                    .Child("Users")
+                    .PatchAsync(userList);
+
+        }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -51,8 +61,29 @@ namespace TeamVaxxers
 
         private void removeUserBtn_Click(object sender, EventArgs e)
         {
+            int check = userList.removeUser(removeUserBox.Text);
+            if (check == -1)
+            {
 
+
+                MessageBox.Show("User " + removeUserBox.Text + " does not exist");
+            }
+            else if(check==-2)
+            {
+                MessageBox.Show("You can't delete the adminstrator user");
+
+            }
+            else
+            {
+                ListUsers.Items.Remove(ListUsers.FindItemWithText(removeUserBox.Text));
+                addUserFirebase();
+
+
+
+            }
         }
+
+    
 
         private void oldPassword_TextChanged(object sender, EventArgs e)
         {
@@ -136,6 +167,33 @@ namespace TeamVaxxers
                 splitContainer3.Panel2Collapsed = false;
                 splitContainer3.Size = new Size(1235, 375);
             }
+
+        }
+       
+
+        private void addUserBtn_Click(object sender, EventArgs e)
+        {
+           int check = userList.addUser(addUserBox.Text, addPassword.Text);
+            if (check == -1)
+            { 
+            
+            
+                MessageBox.Show("User" + addUserBox.Text + " already exists");
+            }
+            else
+            {
+                ListViewItem newList = new ListViewItem(addUserBox.Text);
+                newList.SubItems.Add(Convert.ToString(0));
+                ListUsers.Items.Add(newList);
+                addUserFirebase();
+                
+
+
+            }
+        }
+
+        private void removeUserBox_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

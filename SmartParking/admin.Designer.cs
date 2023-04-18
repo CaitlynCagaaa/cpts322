@@ -163,6 +163,7 @@ namespace TeamVaxxers
             this.addUserBtn.Size = new System.Drawing.Size(96, 23);
             this.addUserBtn.TabIndex = 0;
             this.addUserBtn.Text = "add user";
+            this.addUserBtn.Click += new System.EventHandler(this.addUserBtn_Click);
             // 
             // removeUserBtn
             // 
@@ -310,6 +311,7 @@ namespace TeamVaxxers
             this.removeUserBox.TabIndex = 5;
             this.removeUserBox.Text = "User\'s username";
             this.removeUserBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.removeUserBox.TextChanged += new System.EventHandler(this.removeUserBox_TextChanged);
             // 
             // addPassword
             // 
