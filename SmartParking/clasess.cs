@@ -25,7 +25,7 @@ namespace TeamVaxxers
         public int Total { get; set; }
         public List<Beacon> data { get; set; }
 
-        int addBeacon(long id)
+        public int addBeacon(long id)
         {
             
             foreach (var b1 in this.data)
@@ -40,6 +40,10 @@ namespace TeamVaxxers
             Total++;
             Beacon temp = new Beacon();
             temp.Id = id;
+            temp.D1 = -1;
+            temp.D2 = -1;
+            temp.D3 = -1;
+            temp.D4 = -1;
             temp.connected = null;
             data.Add(temp);
             return 0;
@@ -48,7 +52,7 @@ namespace TeamVaxxers
             
 
         }
-        int removeBeacon(int id, CarList list)
+        public int removeBeacon(int id, CarList list)
         {
             int i = 0;
             foreach (var b1 in this.data)
@@ -81,7 +85,7 @@ namespace TeamVaxxers
         
 
     }
-        int modify(long id1, long id2, CarList list)
+        public int modify(long id1, long id2, CarList list)
         {
             foreach (var b1 in this.data)
             {
@@ -220,7 +224,7 @@ namespace TeamVaxxers
 
 
         }
-        int removeCars(string plate, Beacons list)
+        public long removeCars(string plate, Beacons list)
         {
             //int i = 0;
             foreach (var car1 in this.data)
@@ -236,12 +240,13 @@ namespace TeamVaxxers
                             if (b1.Id == car1.connected)
                             {
                                 b1.connected = null;
+                                return b1.Id;
                             }
                         }
                     }
                     this.data.Remove(car1);
                     this.Total--;
-                    return 0;
+                    return -2;//beacon ids prob can't be zero but definnitly cant be negative
                 }
 
 

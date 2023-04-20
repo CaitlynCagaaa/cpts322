@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using Firebase.Database;
 using Firebase.Database.Query;
+using System.Linq;
 
 namespace TeamVaxxers
 {
@@ -86,7 +87,8 @@ namespace TeamVaxxers
             {
                 if (value.connected == null|| value.connected=="")
                 {
-                    ListViewItem newList = new ListViewItem("");
+                    ListViewItem newList = new ListViewItem("*");
+                    
                     newList.SubItems.Add((""));
                     newList.SubItems.Add((""));
                     newList.SubItems.Add(Convert.ToString(value.Id));
@@ -144,7 +146,7 @@ namespace TeamVaxxers
             }
             else
             {
-                ListUsers.Items.Remove(ListUsers.FindItemWithText(removeUserBox.Text));
+                ListUsers.Items.Remove(ListUsers.FindItemWithText(removeUserBox.Text,true, 0, false));
                 addUserFirebase();
 
 
@@ -268,6 +270,11 @@ namespace TeamVaxxers
 
         private void addCarBtn_Click(object sender, EventArgs e)
         {
+            if(addDriver.Text.Contains("*"))
+            {
+                MessageBox.Show("Driver names can not contain ~");
+
+            }
             int check = Cars.addCars(addDriver.Text,addColor.Text,addPlate.Text);
             if (check == -1)
             {
@@ -289,5 +296,70 @@ namespace TeamVaxxers
 
 
         }
+
+        private void removeCarBtn_Click(object sender, EventArgs e)
+        {
+            long check = Cars.removeCars(removePlate.Text, beaconList);
+            if (check == -1)
+            {
+
+
+                MessageBox.Show("Car with plate " + removePlate.Text + " does not exist");
+            }
+            else if(check ==-2)
+            {
+                ListCars.Items.Remove(ListCars.FindItemWithText(removePlate.Text, true, 0, false));
+
+                addCarFirebase();
+            }
+            else
+            {
+                ListCars.Items.Remove(ListCars.FindItemWithText(removePlate.Text));
+                //only car is removed so need to put the beacon id in 
+                ListViewItem newList = new ListViewItem("~");
+                newList.SubItems.Add((""));
+                newList.SubItems.Add((""));
+                newList.SubItems.Add(Convert.ToString(check));
+                ListCars.Items.Add(newList);
+                addCarFirebase();
+
+
+
+
+
+            }
+        }
+
+        private void addBeaconBtn_Click(object sender, EventArgs e)
+        {
+            if(addBeacon.Text.All(char.IsDigit)==false || addBeacon.Text.Equals(""))
+            {
+                MessageBox.Show("Beacon Id must be positive a number");
+                return;
+            }
+        
+            int check = beaconList.addBeacon((long)Convert.ToInt64(addBeacon.Text));
+            if (check == -1)
+            {
+
+
+                MessageBox.Show("Beacon with Id" + addBeacon.Text) + " already exists");
+            }
+            else
+            {
+                ListViewItem newList = new ListViewItem("*");
+                newList.SubItems.Add((""));
+                newList.SubItems.Add((""));
+                newList.SubItems.Add(addBeacon.Text);
+                ListCars.Items.Add(newList);
+                addBeaconFirebase();
+
+
+            }
+
+
+        
+
+    }
     }
 }
