@@ -198,7 +198,7 @@ namespace TeamVaxxers
     {
         public List<Car> data { get; set; }
         public int Total { get; set; }
-        int addCars(string owner, string color, string plate )
+        public int addCars(string owner, string color, string plate )
         {
             foreach (var car1 in this.data)
             {
@@ -254,7 +254,7 @@ namespace TeamVaxxers
 
 
 
-        int connect(Beacons list, int id, string plate)
+        public int connect(Beacons list, int id, string plate)
         {
             int check =-1;
             Car temp;
@@ -308,7 +308,7 @@ namespace TeamVaxxers
 
         }
        
-        int modify(Beacons list, string plate1, string plate2 )
+        public int modify(Beacons list, string plate1, string plate2 )
         {
             foreach (var c1 in this.data)
             {

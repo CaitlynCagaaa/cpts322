@@ -62,6 +62,10 @@ namespace TeamVaxxers
             this.ListUsers = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderc1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderc2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderc3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderc4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.addBeacon = new System.Windows.Forms.TextBox();
             this.addDriver = new System.Windows.Forms.TextBox();
             this.addColor = new System.Windows.Forms.TextBox();
@@ -119,7 +123,7 @@ namespace TeamVaxxers
             this.collCar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.collCar.Location = new System.Drawing.Point(0, 0);
             this.collCar.Name = "collCar";
-            this.collCar.Size = new System.Drawing.Size(1235, 35);
+            this.collCar.Size = new System.Drawing.Size(1269, 35);
             this.collCar.TabIndex = 0;
             this.collCar.Text = "Cars and Beacons";
             this.collCar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -133,7 +137,7 @@ namespace TeamVaxxers
             this.collUser.ForeColor = System.Drawing.Color.Black;
             this.collUser.Location = new System.Drawing.Point(0, 0);
             this.collUser.Name = "collUser";
-            this.collUser.Size = new System.Drawing.Size(1235, 33);
+            this.collUser.Size = new System.Drawing.Size(1269, 33);
             this.collUser.TabIndex = 0;
             this.collUser.Text = "Users";
             this.collUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -148,7 +152,7 @@ namespace TeamVaxxers
             this.collChange.ImageAlign = System.Drawing.ContentAlignment.TopRight;
             this.collChange.Location = new System.Drawing.Point(0, 0);
             this.collChange.Name = "collChange";
-            this.collChange.Size = new System.Drawing.Size(1235, 35);
+            this.collChange.Size = new System.Drawing.Size(1269, 35);
             this.collChange.TabIndex = 0;
             this.collChange.Text = "Change Password";
             this.collChange.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -192,6 +196,7 @@ namespace TeamVaxxers
             this.addCarBtn.Size = new System.Drawing.Size(114, 23);
             this.addCarBtn.TabIndex = 0;
             this.addCarBtn.Text = "add car";
+            this.addCarBtn.Click += new System.EventHandler(this.addCarBtn_Click);
             // 
             // removeBeaconBtn
             // 
@@ -270,7 +275,7 @@ namespace TeamVaxxers
             this.splitContainer1.Panel2.Controls.Add(this.newPassword);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(1235, 90);
+            this.splitContainer1.Size = new System.Drawing.Size(1269, 90);
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -348,6 +353,29 @@ namespace TeamVaxxers
             this.columnHeader2.Text = "Level";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // columnHeaderc1
+            // 
+            this.columnHeaderc1.Text = "Owner";
+            this.columnHeaderc1.Width = 238;
+            // 
+            // columnHeaderc2
+            // 
+            this.columnHeaderc2.Text = "color";
+            this.columnHeaderc2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeaderc2.Width = 185;
+            // 
+            // columnHeaderc3
+            // 
+            this.columnHeaderc3.Text = "Plate";
+            this.columnHeaderc3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeaderc3.Width = 308;
+            // 
+            // columnHeaderc4
+            // 
+            this.columnHeaderc4.Text = "Beacon ID";
+            this.columnHeaderc4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeaderc4.Width = 324;
+            // 
             // addBeacon
             // 
             this.addBeacon.Location = new System.Drawing.Point(778, 61);
@@ -368,7 +396,7 @@ namespace TeamVaxxers
             // 
             // addColor
             // 
-            this.addColor.Location = new System.Drawing.Point(325, 100);
+            this.addColor.Location = new System.Drawing.Point(325, 65);
             this.addColor.Name = "addColor";
             this.addColor.Size = new System.Drawing.Size(100, 20);
             this.addColor.TabIndex = 8;
@@ -377,7 +405,7 @@ namespace TeamVaxxers
             // 
             // addPlate
             // 
-            this.addPlate.Location = new System.Drawing.Point(446, 100);
+            this.addPlate.Location = new System.Drawing.Point(446, 65);
             this.addPlate.Name = "addPlate";
             this.addPlate.Size = new System.Drawing.Size(100, 20);
             this.addPlate.TabIndex = 9;
@@ -429,7 +457,7 @@ namespace TeamVaxxers
             // 
             // oldCar
             // 
-            this.oldCar.Location = new System.Drawing.Point(446, 154);
+            this.oldCar.Location = new System.Drawing.Point(325, 103);
             this.oldCar.Name = "oldCar";
             this.oldCar.Size = new System.Drawing.Size(100, 20);
             this.oldCar.TabIndex = 15;
@@ -483,7 +511,7 @@ namespace TeamVaxxers
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer2.Size = new System.Drawing.Size(1235, 258);
+            this.splitContainer2.Size = new System.Drawing.Size(1269, 258);
             this.splitContainer2.SplitterDistance = 31;
             this.splitContainer2.TabIndex = 6;
             // 
@@ -525,18 +553,24 @@ namespace TeamVaxxers
             this.splitContainer3.Panel2.Controls.Add(this.removeBeaconBtn);
             this.splitContainer3.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer3.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
-            this.splitContainer3.Size = new System.Drawing.Size(1235, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(1269, 371);
             this.splitContainer3.SplitterDistance = 37;
             this.splitContainer3.TabIndex = 0;
             // 
             // ListCars
             // 
+            this.ListCars.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderc1,
+            this.columnHeaderc2,
+            this.columnHeaderc3,
+            this.columnHeaderc4});
             this.ListCars.HideSelection = false;
-            this.ListCars.Location = new System.Drawing.Point(14, 197);
+            this.ListCars.Location = new System.Drawing.Point(58, 197);
             this.ListCars.Name = "ListCars";
             this.ListCars.Size = new System.Drawing.Size(1056, 92);
             this.ListCars.TabIndex = 0;
             this.ListCars.UseCompatibleStateImageBehavior = false;
+            this.ListCars.View = System.Windows.Forms.View.Details;
             this.ListCars.SelectedIndexChanged += new System.EventHandler(this.ListCars_SelectedIndexChanged);
             // 
             // splitContainer4
@@ -559,7 +593,7 @@ namespace TeamVaxxers
             this.splitContainer4.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer4.Panel2Collapsed = true;
             this.splitContainer4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer4.Size = new System.Drawing.Size(1235, 94);
+            this.splitContainer4.Size = new System.Drawing.Size(1269, 94);
             this.splitContainer4.SplitterDistance = 69;
             this.splitContainer4.TabIndex = 6;
             // 
@@ -579,7 +613,7 @@ namespace TeamVaxxers
             this.AutoScrollMargin = new System.Drawing.Size(1, 1);
             this.AutoScrollMinSize = new System.Drawing.Size(1, 1);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1252, 653);
+            this.ClientSize = new System.Drawing.Size(1286, 653);
             this.Controls.Add(this.splitContainer4);
             this.Controls.Add(this.splitContainer3);
             this.Controls.Add(this.splitContainer2);
@@ -662,6 +696,10 @@ namespace TeamVaxxers
 
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        
+        private System.Windows.Forms.ColumnHeader columnHeaderc1;
+        private System.Windows.Forms.ColumnHeader columnHeaderc2;
+        private System.Windows.Forms.ColumnHeader columnHeaderc3;
+        private System.Windows.Forms.ColumnHeader columnHeaderc4;
+
     }
 }

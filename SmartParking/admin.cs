@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using Firebase.Database;
 using Firebase.Database.Query;
 
@@ -11,6 +12,8 @@ namespace TeamVaxxers
         Graphics G;
         User current;
         Users userList;
+        CarList Cars;
+        Beacons beaconList;
         FirebaseClient client = new FirebaseClient("https://parking-lot-f206b-default-rtdb.firebaseio.com");
         public admin()
         {
@@ -28,6 +31,7 @@ namespace TeamVaxxers
 
         }
 
+
         private void admin_Load(object sender, EventArgs e)
         {
             G = this.CreateGraphics();
@@ -39,13 +43,78 @@ namespace TeamVaxxers
                 newList.SubItems.Add(Convert.ToString(value.level));
                 ListUsers.Items.Add(newList);
             }
+           Task c = getCarDataAsync();
+            //c.Wait();
             
+
+            c = getBeaconDataAsync();
+            //c.Wait();
+            
+           
+            
+
+
+        }
+        private  async Task  getCarDataAsync() // grabs population from database 
+        {
+
+            Cars = await client
+            .Child("Cars/")//Prospect list
+           .OnceSingleAsync<CarList>();
+            foreach (var value in Cars.data)
+            {
+                ListViewItem newList = new ListViewItem(value.owner);
+                newList.SubItems.Add((value.color));
+                newList.SubItems.Add((value.plate));
+                newList.SubItems.Add(Convert.ToString(value.connected));
+                ListCars.Items.Add(newList);
+
+
+            }
+
+
+
+
+        }
+        private async Task getBeaconDataAsync() // grabs population from database 
+        {
+
+            beaconList = await client
+            .Child("Beacons/")//Prospect list
+           .OnceSingleAsync<Beacons>();
+            foreach (var value in beaconList.data)
+            {
+                if (value.connected == null|| value.connected=="")
+                {
+                    ListViewItem newList = new ListViewItem("");
+                    newList.SubItems.Add((""));
+                    newList.SubItems.Add((""));
+                    newList.SubItems.Add(Convert.ToString(value.Id));
+                    ListCars.Items.Add(newList);
+                }
+
+            }
+
         }
         private async void addUserFirebase()// assumption that the userlist in firebase is not changed from firebase, at least while program is running 
         {
             await client
                     .Child("Users")
                     .PatchAsync(userList);
+
+        }
+        private async void addCarFirebase()// assumption that the userlist in firebase is not changed from firebase, at least while program is running 
+        {
+            await client
+                    .Child("Cars")
+                    .PatchAsync(Cars);
+
+        }
+        private async void addBeaconFirebase()// assumption that the userlist in firebase is not changed from firebase, at least while program is running 
+        {
+             await client
+                    .Child("Beacons")
+                    .PatchAsync(beaconList);
 
         }
 
@@ -194,6 +263,30 @@ namespace TeamVaxxers
 
         private void removeUserBox_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void addCarBtn_Click(object sender, EventArgs e)
+        {
+            int check = Cars.addCars(addDriver.Text,addColor.Text,addPlate.Text);
+            if (check == -1)
+            {
+
+
+                MessageBox.Show("Car with plate number" + addPlate.Text + " already exists");
+            }
+            else
+            {
+                ListViewItem newList = new ListViewItem(addDriver.Text);
+                newList.SubItems.Add((addColor.Text));
+                newList.SubItems.Add((addPlate.Text));
+                newList.SubItems.Add(Convert.ToString(-1));
+                ListCars.Items.Add(newList);
+                addCarFirebase();
+
+
+            }
+
 
         }
     }
