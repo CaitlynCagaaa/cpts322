@@ -24,6 +24,8 @@ namespace TeamVaxxers
         Rectangle[] rect= new Rectangle[6];
         User current;
         Users userList;
+        Parking Lot;
+        Sensors sense;
         public ParkingLot()
         {
             InitializeComponent();
@@ -40,37 +42,56 @@ namespace TeamVaxxers
         private void ParkingLot_Load(object sender, EventArgs e)
         {
             G = this.CreateGraphics();
+            getBeaconDataAsync();
+            getParkingDataAsync();
+            //call aprking lot map
+            //DrawSlots();
+
+            //Update parking space rectangle color
+            //G.FillRectangle(myBrush2, rect[2]);
+            // G.FillRectangle(myBrush2, rect[5]);
+
+            //draw parking numbers
+        }
+        private void trilaterate(Beacon beacon)
+        {
+            Point pt = beacon.trilateratetion(sense);
+            //call parking lot method to check for filled slots
+            //repaint
         }
         private void loadData(object sender, EventArgs e)
         {
-            getBeaconDataAsync();
+            
         }
-        private void DrawSlots(object sender, EventArgs e)//TODO: parking lot classes, trilateration of parking lots, auto update rather than button update.
+        private void DrawSlots(object sender,  PaintEventArgs e)//TODO: parking lot classes, trilateration of parking lots, auto update rather than button update.
         {
-            //call aprking lot map
             Pen blackPen = new Pen(Color.Black, 0);
-            SolidBrush myBrush = new SolidBrush(Color.SkyBlue);
+            SolidBrush myBrush = new SolidBrush(Color.FloralWhite);
             SolidBrush myBrush2 = new SolidBrush(Color.YellowGreen);
 
 
             // Create rectangle and Draw rectangle to screen.
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
             {
-               rect[i] = new Rectangle(100 * i, 100, 100, 200);
+                rect[i] = new Rectangle(100 * i, 100, 100, 200);
                 G.FillRectangle(myBrush, rect[i]);
                 G.DrawRectangle(blackPen, rect[i]);
+                DrawStringFloatFormat((i + 1).ToString(), 100 * i + 50, 200.0F);
             }
+            Rectangle[] street = new Rectangle[1];
+            street[0] = new Rectangle(0, 300, 300, 50);
+            G.FillRectangle(myBrush, street[0]);
+            G.DrawRectangle(blackPen, street[0]);
 
-            //Update parking space rectangle color
-            G.FillRectangle(myBrush2, rect[2]);
-            G.FillRectangle(myBrush2, rect[5]);
-
-            //draw parking numbers
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
             {
-                 DrawStringFloatFormat((i + 1).ToString(), 100 * i + 50, 200.0F);
+                rect[i + 3] = new Rectangle(100 * i, 350, 100, 200);
+                G.FillRectangle(myBrush, rect[i + 3]);
+                G.DrawRectangle(blackPen, rect[i + 3]);
+                DrawStringFloatFormat((i + 3).ToString(), 100 * (i) + 50, 450.0F);
             }
         }
+            
         private async void getBeaconDataAsync() // grabs population from database 
         {
             
@@ -86,8 +107,23 @@ namespace TeamVaxxers
 
 
         }
+        private async void getParkingDataAsync() // grabs population from database 
+        {
 
-        private void onChildChanged() // Waits for data base to start with variable
+
+            //******************** Get initial list of beacons ***********************//
+            var Lot = await client
+               .Child("ParkingMap/")//Prospect list
+               .OnceSingleAsync<Parking>();
+
+
+            var sense = await client
+               .Child("Sensors/")//Prospect list
+               .OnceSingleAsync<Parking>();
+
+        }
+
+            private void onChildChanged() // Waits for data base to start with variable
         {
 
 
@@ -96,7 +132,8 @@ namespace TeamVaxxers
             var subscription = observable
                 .Subscribe(x =>
                 {
-                    Console.WriteLine($"beacon id: { x.Object.Id} [{ x.Object.D1}]");                 
+                    Console.WriteLine($"beacon id: { x.Object.Id} [{ x.Object.D1}]");
+                    
                 });
            
         }

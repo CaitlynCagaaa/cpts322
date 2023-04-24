@@ -14,9 +14,13 @@ namespace TeamVaxxers
         public long Time { get; set; }
         public string connected;
         public int inside;
-        void trilaterate(Sensors location, Parking slotPos)
-        {
-
+        public Point trilateratetion(Sensors location)
+        { 
+            //do trlateration for specific pt here 
+            Point pt = new Point();
+            pt.x =0;
+            pt.y = 0;
+            return  pt;
         }
 
     }
@@ -151,9 +155,21 @@ namespace TeamVaxxers
         public int Total { get; set; }
         public int number;
 
-        Slot checkSlot(Beacon ID)
+        int checkSlot(Point pt, int ID )
         {
-            return data[1]; //placeholder so no error
+            foreach(var slot in data)
+            {
+                double highX = slot.vertice[1].x - ((slot.vertice[1].x - slot.vertice[0].x) * .07) ;
+                double lowX = slot.vertice[1].x - ((slot.vertice[1].x - slot.vertice[0].x) * .93);
+                double highY= slot.vertice[2].y - ((slot.vertice[2].y - slot.vertice[0].y) * .07);
+                double lowY = slot.vertice[2].y - ((slot.vertice[2].y - slot.vertice[0].y) * .93);
+                if (slot.vertice[0].x<pt.x && slot.vertice[1].x>pt.x && slot.vertice[0].y < pt.y && slot.vertice[2].y > pt.y)
+                {
+
+                }
+
+            }
+            return 1; //placeholder so no error
         }
 
     }

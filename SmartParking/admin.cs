@@ -343,7 +343,7 @@ namespace TeamVaxxers
             {
 
 
-                MessageBox.Show("Beacon with Id" + addBeacon.Text) + " already exists");
+                MessageBox.Show("Beacon with Id" + addBeacon.Text + " already exists");
             }
             else
             {
