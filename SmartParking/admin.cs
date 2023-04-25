@@ -16,17 +16,17 @@ namespace TeamVaxxers
         CarList Cars;
         Beacons beaconList;
         FirebaseClient client = new FirebaseClient("https://parking-lot-f206b-default-rtdb.firebaseio.com");
-        public admin()
+        ParkingLot display;
+        public admin(ParkingLot dispaly)
         {
             InitializeComponent();
+            this.display = dispaly;
         }
         private void displayBtn_Click_1(object sender, EventArgs e)
         {
             this.Hide();
-            ParkingLot engine = new ParkingLot();
-            engine.setUser(current);
-            engine.setUsers(userList);
-            engine.ShowDialog();
+            display.setUsers(userList);
+            display.Show();
             this.Close();
 
 

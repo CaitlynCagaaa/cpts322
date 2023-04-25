@@ -14,13 +14,16 @@ using System.Net.Http;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace TeamVaxxers
 {
     public partial class ParkingLot : Form
     {
-        FirebaseClient client = new FirebaseClient("https://heymotocarro-1a1d4.firebaseio.com/");
-        Graphics G;
+        //FirebaseClient client = new FirebaseClient("https://heymotocarro-1a1d4.firebaseio.com/");
+        FirebaseClient client = new FirebaseClient(" https://parking-lot-f206b-default-rtdb.firebaseio.com/");
+ 
+         Graphics G;
         Rectangle[] rect= new Rectangle[6];
         User current;
         Users userList;
@@ -29,7 +32,21 @@ namespace TeamVaxxers
         public ParkingLot()
         {
             InitializeComponent();
-           // WindowState = FormWindowState.Maximized;
+            // WindowState = FormWindowState.Maximized;
+
+            //c.Wait();
+            Task c = getParkingDataAsync();
+            //c.Wait();
+            //if(sense==null)
+            // {
+            //  MessageBox.Show("error: please fix database and resart program if you want to use the parking display");
+            //  return;
+            //}
+
+            c = getSensorDataAsync();
+            //c.Wait();
+
+
         }
         public void setUser(User currUser)
         {
@@ -42,26 +59,66 @@ namespace TeamVaxxers
         private void ParkingLot_Load(object sender, EventArgs e)
         {
             G = this.CreateGraphics();
-            getBeaconDataAsync();
-            getParkingDataAsync();
-            //call aprking lot map
-            //DrawSlots();
 
-            //Update parking space rectangle color
-            //G.FillRectangle(myBrush2, rect[2]);
-            // G.FillRectangle(myBrush2, rect[5]);
+            getBeaconDataAsync();
+
+
 
             //draw parking numbers
         }
         private void trilaterate(Beacon beacon)
         {
-            Point pt = beacon.trilateratetion(sense);
+            
+           
+               Point pt = beacon.trilateratetion(sense);
+            
+            
+              beacon.inside = Lot.checkSlot(pt, beacon.Id);
+            
             //call parking lot method to check for filled slots
+            
+            this.Paint += repaint;
+            
             //repaint
         }
         private void loadData(object sender, EventArgs e)
         {
             
+        }
+        private void repaint(object sender, PaintEventArgs e)
+        {
+            Pen blackPen = new Pen(Color.Black, 0);
+            SolidBrush myBrush = new SolidBrush(Color.FloralWhite);
+            SolidBrush myBrush2 = new SolidBrush(Color.YellowGreen);
+            SolidBrush myBrush3 = new SolidBrush(Color.Red);
+            for ( int i=0;i<6;i++)
+            {
+                if(Lot.data[i].avialability=='a')
+                {
+                    G.FillRectangle(myBrush, rect[i]);
+                    G.DrawRectangle(blackPen, rect[i]);
+
+
+                }
+                else if(Lot.data[i].avialability == 'o')
+                {
+                    G.FillRectangle(myBrush2, rect[i]);
+                    G.DrawRectangle(blackPen, rect[i]);
+                }
+                else if (Lot.data[i].avialability == 'd' || Lot.data[i].avialability == 'b')
+                {
+                    G.FillRectangle(myBrush3, rect[i]);
+                    G.DrawRectangle(blackPen, rect[i]);
+                }
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                DrawStringFloatFormat((i + 1).ToString(), 100 * i + 50, 200.0F);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                DrawStringFloatFormat((i + 3).ToString(), 100 * (i) + 50, 450.0F);
+            }
         }
         private void DrawSlots(object sender,  PaintEventArgs e)//TODO: parking lot classes, trilateration of parking lots, auto update rather than button update.
         {
@@ -102,25 +159,42 @@ namespace TeamVaxxers
                .OnceSingleAsync<Beacons>();
             displayBeaconsData(BeaconsSet);
 
+            foreach(var beac in BeaconsSet.data)
+            {
+                trilaterate(beac);
+            }
+
+
             //******************** Get changes on beacons ***********************//
             onChildChanged();
 
 
         }
-        private async void getParkingDataAsync() // grabs population from database 
+        private async Task getParkingDataAsync() // grabs population from database 
         {
 
 
             //******************** Get initial list of beacons ***********************//
-            var Lot = await client
+            Lot = await client
                .Child("ParkingMap/")//Prospect list
                .OnceSingleAsync<Parking>();
 
+            foreach(var slot in Lot.data)
+            {
+                slot.avialability = 'a';
+                slot.spot = -1;
 
-            var sense = await client
+            }
+
+
+            
+
+        }
+        private async Task getSensorDataAsync()
+        {
+            sense = await client
                .Child("Sensors/")//Prospect list
-               .OnceSingleAsync<Parking>();
-
+               .OnceSingleAsync<Sensors>();
         }
 
             private void onChildChanged() // Waits for data base to start with variable
@@ -132,8 +206,8 @@ namespace TeamVaxxers
             var subscription = observable
                 .Subscribe(x =>
                 {
-                    Console.WriteLine($"beacon id: { x.Object.Id} [{ x.Object.D1}]");
-                    
+                    trilaterate(x.Object);
+
                 });
            
         }
@@ -163,11 +237,11 @@ namespace TeamVaxxers
         private void settingsBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            admin engine = new admin();
+            admin engine = new admin(this);
             engine.setUser(current);
             engine.setUsers(userList);
             engine.ShowDialog();
-            this.Close();
+            //this.Close();
 
         }
     }

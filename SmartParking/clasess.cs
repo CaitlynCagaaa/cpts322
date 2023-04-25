@@ -15,11 +15,39 @@ namespace TeamVaxxers
         public string connected;
         public int inside;
         public Point trilateratetion(Sensors location)
-        { 
+        {
             //do trlateration for specific pt here 
+            double A =Math.Abs( 2 * location.data[1].position.x - 2 * location.data[0].position.x);
+            double B = Math.Abs( 2 * location.data[1].position.y - 2 * location.data[0].position.y);
+            double C = Math.Abs( D1 * D1 - D2 * D2 - (location.data[0].position.x * location.data[0].position.x) +
+                (location.data[1].position.x * location.data[1].position.x) - (location.data[0].position.y * location.data[0].position.y)
+                + (location.data[1].position.y * location.data[1].position.y));
+            double D = Math.Abs(2 * location.data[2].position.x - 2 * location.data[1].position.x);
+            double E = Math.Abs(2 * location.data[2].position.y - 2 * location.data[1].position.y);
+
+            double F = Math.Abs( D2 * D2 - D3 * D3 - (location.data[1].position.x * location.data[1].position.x) +
+                (location.data[2].position.x * location.data[2].position.x) - (location.data[1].position.y * location.data[1].position.y)
+                + (location.data[2].position.y * location.data[2].position.y));
+
+            double G = Math.Abs( 2 * location.data[3].position.x - 2 * location.data[2].position.x);
+            double H = Math.Abs(2 * location.data[3].position.y - 2 * location.data[2].position.y);
+
+            double I = Math.Abs(D3 * D3 - D4 * D4 - (location.data[2].position.x * location.data[2].position.x) +
+                (location.data[3].position.x * location.data[3].position.x) - (location.data[2].position.y * location.data[2].position.y)
+                + (location.data[3].position.y * location.data[3].position.y));
+
             Point pt = new Point();
-            pt.x =0;
-            pt.y = 0;
+            double x1 = ((C*E -F*B)/ (E*A - B*D));
+            double y1 = ((C * D - F * A) / (B * D - A * E));
+            //double x2 = ((C * H- I * B) / (H * A - B * G));
+           // double y2 = ((C * G - I * A) / (B * G - A * H));
+            double x3 = (F * H - I * E) / (H * D - E * G);
+            double y3 = (F * G - I * D) / (E * G - D * H);
+
+            pt.x = (x1  + x3) / 2;
+            pt.y = (y1  + y3) / 2;
+
+
             return  pt;
         }
 
@@ -153,44 +181,119 @@ namespace TeamVaxxers
     {
         public List<Slot> data { get; set; }//should only be 6 slots
         public int Total { get; set; }
-        public int number;
+        //public int number;
 
-        int checkSlot(Point pt, int ID )
+        public int checkSlot(Point pt, long ID )
         {
+            int slotNum = -1;
+            int i = 1;
             foreach(var slot in data)
             {
-                double highX = slot.vertice[1].x - ((slot.vertice[1].x - slot.vertice[0].x) * .07) ;
-                double lowX = slot.vertice[1].x - ((slot.vertice[1].x - slot.vertice[0].x) * .93);
-                double highY= slot.vertice[2].y - ((slot.vertice[2].y - slot.vertice[0].y) * .07);
-                double lowY = slot.vertice[2].y - ((slot.vertice[2].y - slot.vertice[0].y) * .93);
-                if (slot.vertice[0].x<pt.x && slot.vertice[1].x>pt.x && slot.vertice[0].y < pt.y && slot.vertice[2].y > pt.y)
+                double lowX = Math.Abs(slot.position[1].x - ((slot.position[1].x - slot.position[0].x) * .837)) ;
+                double highX = Math.Abs(slot.position[0].x + ((slot.position[1].x - slot.position[0].x) * .837));
+                double lowY= Math.Abs(slot.position[2].y - ((slot.position[2].y - slot.position[0].y) * .837));
+                double highY = Math.Abs(slot.position[0].y + ((slot.position[2].y - slot.position[0].y) * .837));
+                if (lowX < pt.x && highX > pt.x && lowY < pt.y && highY > pt.y)
                 {
+                    
+                    slot.changeColor(1, ID);
+                    slot.spot = ID;
+                    slotNum = i;
+                    
 
                 }
+                else if (slot.position[0].x<pt.x && slot.position[1].x>pt.x && lowY < pt.y && highY > pt.y)
+                {
+                    slot.changeColor(0, ID);
+                    slot.spot = ID;
+                    if (slot.position[0].x < pt.x)
+                    {
+                        if (i != 1 && i !=4)
+                        {
+                            data[i - 2].changeColor(0, -1);
+
+                        }
+                    }
+                    else if (slot.position[1].x > pt.x)
+                    {
+                        if (i != 3 && i != 6)
+                        {
+                            data[i].changeColor(0, -1);
+
+                        }
+
+                    }
+                    slotNum = -2;
+                }
+                else if(slot.spot==ID)
+                {
+                    slot.clear();
+                }
+                i++;
 
             }
-            return 1; //placeholder so no error
+            return slotNum; //placeholder so no error
         }
 
     }
     public class Slot
     {
 
-        public List<Point> vertice { get; set; }//should onyl be 4 points
+        public List<Point> position { get; set; }//should onyl be 4 points
         
         public int Total { get; set; }
 
-        int spot;
-        char avialability; // a = available, o = occubied d= delinquent
+        public long spot;
+        public long prev;
+        
+        public char avialability; // a = available, o = occubied d= double b=bounds delinquent
 
         
-        public void changeColor()
+        public void changeColor(int inside70, long ID)
         {
+            if(inside70==1)
+            {
+                if(spot!=-1 && spot!=ID)
+                {
+                    avialability = 'd';
+                    prev = spot;
+                    spot = ID;
+                }
+                else
+                {
+                    avialability = 'o';
+                }
+
+            }
+            else
+            {
+                avialability = 'b';
+                prev = spot;
+                spot = ID;
+            }
 
 
         }
         public void clear()
         {
+            if(avialability == 'd')
+            {
+                avialability = 'o';
+                spot = prev;
+                prev = -1;
+                return;
+
+            }
+            if(avialability == 'b')
+            {
+                avialability = 'a';
+                spot = -1;
+                prev = -1;
+            }
+            avialability = 'a';
+            
+            spot = -1;
+            prev = -1;
 
         }
 
@@ -200,8 +303,8 @@ namespace TeamVaxxers
     }
     public class Point
     {
-        public int x;
-        public int y;
+        public double x;
+        public double y;
     }
     public class Sensors
     {
@@ -211,7 +314,7 @@ namespace TeamVaxxers
     }
     public class Sensor
     {
-        public Point location { get; set; }
+        public Point position { get; set; }
 
     }
     public class CarList
