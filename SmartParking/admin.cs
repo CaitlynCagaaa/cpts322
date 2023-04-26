@@ -365,9 +365,27 @@ namespace TeamVaxxers
 
         private void changePassBtn_Click(object sender, EventArgs e)
         {
-            int check =current.changePassword(oldPassword.Text, newPassword.Text);
-            if()
+            int check;
+            foreach (var us in userList.data)
             {
+                if(us.UserName==current.UserName)
+                {
+                     check = us.changePassword(oldPassword.Text, newPassword.Text);
+                }
+
+            }
+             check =current.changePassword(oldPassword.Text, newPassword.Text);
+
+            if(check ==-1)
+            {
+                MessageBox.Show("old Password is wrong");
+            }
+            else
+            {
+                addUserFirebase();
+                
+                oldPassword.Clear();
+                newPassword.Clear();
 
             }
         }

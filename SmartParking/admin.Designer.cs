@@ -83,6 +83,21 @@ namespace TeamVaxxers
             this.ListCars = new System.Windows.Forms.ListView();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.vScroller = new System.Windows.Forms.VScrollBar();
+            this.labeladdPass = new System.Windows.Forms.Label();
+            this.labeladdUser = new System.Windows.Forms.Label();
+            this.labelconnBeac = new System.Windows.Forms.Label();
+            this.labelconnCar = new System.Windows.Forms.Label();
+            this.labelnewColor = new System.Windows.Forms.Label();
+            this.labelnewID = new System.Windows.Forms.Label();
+            this.labelnewOwner = new System.Windows.Forms.Label();
+            this.labelNewPass= new System.Windows.Forms.Label();
+            this.labelnewPlate = new System.Windows.Forms.Label();
+            this.labelOldPass = new System.Windows.Forms.Label();
+            this.labelremoveUser = new System.Windows.Forms.Label();
+            this.labelswapb1 = new System.Windows.Forms.Label();
+            this.labelswapb2 = new System.Windows.Forms.Label();
+            this.labelswapc1 = new System.Windows.Forms.Label();
+            this.labelswapc2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -686,6 +701,21 @@ namespace TeamVaxxers
         private System.Windows.Forms.TextBox conBeacon;
         private System.Windows.Forms.ListView ListUsers;
         private System.Windows.Forms.ListView ListCars;
+        private System.Windows.Forms.Label labelOldPass;
+        private System.Windows.Forms.Label labelNewPass;
+        private System.Windows.Forms.Label labelnewOwner;
+        private System.Windows.Forms.Label labelnewPlate;
+        private System.Windows.Forms.Label labelnewColor;
+        private System.Windows.Forms.Label labelnewID;
+        private System.Windows.Forms.Label labeladdUser;
+        private System.Windows.Forms.Label labeladdPass;
+        private System.Windows.Forms.Label labelremoveUser;
+        private System.Windows.Forms.Label labelswapb1;
+        private System.Windows.Forms.Label labelswapb2;
+        private System.Windows.Forms.Label labelswapc1;
+        private System.Windows.Forms.Label labelswapc2;
+        private System.Windows.Forms.Label labelconnCar;
+        private System.Windows.Forms.Label labelconnBeac;
 
 
 
