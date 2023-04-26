@@ -258,6 +258,8 @@ namespace TeamVaxxers
                 newList.SubItems.Add(Convert.ToString(0));
                 ListUsers.Items.Add(newList);
                 addUserFirebase();
+                addUserBox.Clear();
+                addPassword.Clear();
                 
 
 
@@ -291,6 +293,9 @@ namespace TeamVaxxers
                 newList.SubItems.Add(Convert.ToString(-1));
                 ListCars.Items.Add(newList);
                 addCarFirebase();
+                addDriver.Clear();
+                addColor.Clear();
+                addPlate.Clear();
 
 
             }
@@ -323,6 +328,7 @@ namespace TeamVaxxers
                 newList.SubItems.Add(Convert.ToString(check));
                 ListCars.Items.Add(newList);
                 addCarFirebase();
+                removePlate.Clear();
 
 
 
@@ -354,6 +360,7 @@ namespace TeamVaxxers
                 newList.SubItems.Add(addBeacon.Text);
                 ListCars.Items.Add(newList);
                 addBeaconFirebase();
+                addBeacon.Clear();
 
 
             }
