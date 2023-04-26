@@ -40,12 +40,12 @@ namespace TeamVaxxers
             double x1 = ((C*E -F*B)/ (E*A - B*D));
             double y1 = ((C * D - F * A) / (B * D - A * E));
             //double x2 = ((C * H- I * B) / (H * A - B * G));
-           // double y2 = ((C * G - I * A) / (B * G - A * H));
+            //double y2 = ((C * G - I * A) / (B * G - A * H));
             double x3 = (F * H - I * E) / (H * D - E * G);
             double y3 = (F * G - I * D) / (E * G - D * H);
 
             pt.x = (x1  + x3) / 2;
-            pt.y = (y1  + y3) / 2;
+            pt.y = (y1+ y3) / 2;
 
 
             return  pt;
@@ -189,11 +189,8 @@ namespace TeamVaxxers
             int i = 1;
             foreach(var slot in data)
             {
-                double lowX = Math.Abs(slot.position[1].x - ((slot.position[1].x - slot.position[0].x) * .837)) ;
-                double highX = Math.Abs(slot.position[0].x + ((slot.position[1].x - slot.position[0].x) * .837));
-                double lowY= Math.Abs(slot.position[2].y - ((slot.position[2].y - slot.position[0].y) * .837));
-                double highY = Math.Abs(slot.position[0].y + ((slot.position[2].y - slot.position[0].y) * .837));
-                if (lowX < pt.x && highX > pt.x && lowY < pt.y && highY > pt.y)
+               
+                if (slot.lowX < pt.x && slot.highX > pt.x && slot.lowY < pt.y && slot.highY > pt.y)
                 {
                     
                     slot.changeColor(1, ID);
@@ -202,7 +199,7 @@ namespace TeamVaxxers
                     
 
                 }
-                else if (slot.position[0].x<pt.x && slot.position[1].x>pt.x && lowY < pt.y && highY > pt.y)
+                else if (slot.position[0].x<pt.x && slot.position[1].x>pt.x && slot.lowY < pt.y && slot.highY > pt.y)
                 {
                     slot.changeColor(0, ID);
                     slot.spot = ID;
@@ -210,7 +207,7 @@ namespace TeamVaxxers
                     {
                         if (i != 1 && i !=4)
                         {
-                            data[i - 2].changeColor(0, -1);
+                            data[i - 2].changeColor(0, ID);
 
                         }
                     }
@@ -218,16 +215,16 @@ namespace TeamVaxxers
                     {
                         if (i != 3 && i != 6)
                         {
-                            data[i].changeColor(0, -1);
+                            data[i].changeColor(0, ID);
 
                         }
 
                     }
                     slotNum = -2;
                 }
-                else if(slot.spot==ID)
+                else if(slot.spot==ID || slot.prev==ID)
                 {
-                    slot.clear();
+                    slot.clear(ID);
                 }
                 i++;
 
@@ -242,7 +239,10 @@ namespace TeamVaxxers
         public List<Point> position { get; set; }//should onyl be 4 points
         
         public int Total { get; set; }
-
+        public double lowX;
+        public double lowY;
+        public double highX;
+        public double highY;
         public long spot;
         public long prev;
         
@@ -253,15 +253,16 @@ namespace TeamVaxxers
         {
             if(inside70==1)
             {
-                if(spot!=-1 && spot!=ID)
+                if(spot==-1 || spot==ID)
+                {
+                    avialability = 'o';
+                    
+                }
+                else
                 {
                     avialability = 'd';
                     prev = spot;
                     spot = ID;
-                }
-                else
-                {
-                    avialability = 'o';
                 }
 
             }
@@ -274,13 +275,20 @@ namespace TeamVaxxers
 
 
         }
-        public void clear()
+        public void clear(long ID)
         {
             if(avialability == 'd')
             {
                 avialability = 'o';
-                spot = prev;
-                prev = -1;
+                if (ID == this.prev)
+                {
+                    prev = -1;
+                }
+                else
+                {
+                    spot = prev;
+                    prev = -1;
+                }
                 return;
 
             }
@@ -289,6 +297,7 @@ namespace TeamVaxxers
                 avialability = 'a';
                 spot = -1;
                 prev = -1;
+                return;
             }
             avialability = 'a';
             

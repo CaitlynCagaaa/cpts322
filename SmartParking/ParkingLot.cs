@@ -36,6 +36,15 @@ namespace TeamVaxxers
 
             //c.Wait();
             Task c = getParkingDataAsync();
+           //bool check = c.Wait(100);
+
+            //while(check==false)
+            //{
+                //c = getParkingDataAsync();
+               // check = c.Wait(1000);
+
+            //}
+
             //c.Wait();
             //if(sense==null)
             // {
@@ -43,7 +52,16 @@ namespace TeamVaxxers
             //  return;
             //}
 
-            c = getSensorDataAsync();
+            Task b = getSensorDataAsync();
+             //check = b.Wait(30);
+
+           // while (check == false)
+            //{
+              //  c = getParkingDataAsync();
+               // check = b.Wait(30);
+
+           // }
+
             //c.Wait();
 
 
@@ -68,12 +86,24 @@ namespace TeamVaxxers
         }
         private void trilaterate(Beacon beacon)
         {
-            
-           
-               Point pt = beacon.trilateratetion(sense);
-            
-            
-              beacon.inside = Lot.checkSlot(pt, beacon.Id);
+
+            if (sense != null)
+            {
+                Point pt = beacon.trilateratetion(sense);
+
+                if (Lot != null)
+                {
+                    beacon.inside = Lot.checkSlot(pt, beacon.Id);
+                }
+                else
+                {
+                    MessageBox.Show("low latency on firebase, resart for accurate dispaly");
+                }
+            }
+            else
+            {
+                MessageBox.Show("low latency on firebase, resart for accurate display");
+            }
             
             //call parking lot method to check for filled slots
             
@@ -117,7 +147,7 @@ namespace TeamVaxxers
             }
             for (int i = 0; i < 3; i++)
             {
-                DrawStringFloatFormat((i + 3).ToString(), 100 * (i) + 50, 450.0F);
+                DrawStringFloatFormat((i + 4).ToString(), 100 * (i) + 50, 450.0F);
             }
         }
         private void DrawSlots(object sender,  PaintEventArgs e)//TODO: parking lot classes, trilateration of parking lots, auto update rather than button update.
@@ -145,7 +175,7 @@ namespace TeamVaxxers
                 rect[i + 3] = new Rectangle(100 * i, 350, 100, 200);
                 G.FillRectangle(myBrush, rect[i + 3]);
                 G.DrawRectangle(blackPen, rect[i + 3]);
-                DrawStringFloatFormat((i + 3).ToString(), 100 * (i) + 50, 450.0F);
+                DrawStringFloatFormat((i + 4).ToString(), 100 * (i) + 50, 450.0F);
             }
         }
             
@@ -158,6 +188,8 @@ namespace TeamVaxxers
                .Child("Beacons/")//Prospect list
                .OnceSingleAsync<Beacons>();
             displayBeaconsData(BeaconsSet);
+
+            
 
             foreach(var beac in BeaconsSet.data)
             {
@@ -183,6 +215,10 @@ namespace TeamVaxxers
             {
                 slot.avialability = 'a';
                 slot.spot = -1;
+                slot.lowX = Math.Abs(slot.position[1].x - ((slot.position[1].x - slot.position[0].x) * .837));
+                slot.highX = Math.Abs(slot.position[0].x + ((slot.position[1].x - slot.position[0].x) * .837));
+                slot.lowY = Math.Abs(slot.position[2].y - ((slot.position[2].y - slot.position[0].y) * .837));
+                slot.highY = Math.Abs(slot.position[0].y + ((slot.position[2].y - slot.position[0].y) * .837));
 
             }
 
@@ -237,8 +273,8 @@ namespace TeamVaxxers
         private void settingsBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            admin engine = new admin(this);
-            engine.setUser(current);
+            admin engine = new admin(this, current);
+            //engine.setUser(current);
             engine.setUsers(userList);
             engine.ShowDialog();
             //this.Close();

@@ -17,8 +17,9 @@ namespace TeamVaxxers
         Beacons beaconList;
         FirebaseClient client = new FirebaseClient("https://parking-lot-f206b-default-rtdb.firebaseio.com");
         ParkingLot display;
-        public admin(ParkingLot dispaly)
+        public admin(ParkingLot dispaly, User curr)
         {
+            setUser(curr);
             InitializeComponent();
             this.display = dispaly;
         }
@@ -361,5 +362,14 @@ namespace TeamVaxxers
         
 
     }
+
+        private void changePassBtn_Click(object sender, EventArgs e)
+        {
+            int check =current.changePassword(oldPassword.Text, newPassword.Text);
+            if()
+            {
+
+            }
+        }
     }
 }
