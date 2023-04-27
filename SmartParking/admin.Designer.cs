@@ -56,6 +56,8 @@ namespace TeamVaxxers
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.oldPassword = new System.Windows.Forms.TextBox();
             this.newPassword = new System.Windows.Forms.TextBox();
+            this.labelNewPass = new System.Windows.Forms.Label();
+            this.labelOldPass = new System.Windows.Forms.Label();
             this.addUserBox = new System.Windows.Forms.TextBox();
             this.removeUserBox = new System.Windows.Forms.TextBox();
             this.addPassword = new System.Windows.Forms.TextBox();
@@ -79,25 +81,25 @@ namespace TeamVaxxers
             this.newBeacon = new System.Windows.Forms.TextBox();
             this.oldBeacon = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.labeladdUser = new System.Windows.Forms.Label();
+            this.labeladdPass = new System.Windows.Forms.Label();
+            this.labelremoveUser = new System.Windows.Forms.Label();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.ListCars = new System.Windows.Forms.ListView();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.vScroller = new System.Windows.Forms.VScrollBar();
-            this.labeladdPass = new System.Windows.Forms.Label();
-            this.labeladdUser = new System.Windows.Forms.Label();
-            this.labelconnBeac = new System.Windows.Forms.Label();
-            this.labelconnCar = new System.Windows.Forms.Label();
-            this.labelnewColor = new System.Windows.Forms.Label();
-            this.labelnewID = new System.Windows.Forms.Label();
-            this.labelnewOwner = new System.Windows.Forms.Label();
-            this.labelNewPass= new System.Windows.Forms.Label();
-            this.labelnewPlate = new System.Windows.Forms.Label();
-            this.labelOldPass = new System.Windows.Forms.Label();
-            this.labelremoveUser = new System.Windows.Forms.Label();
             this.labelswapb1 = new System.Windows.Forms.Label();
             this.labelswapb2 = new System.Windows.Forms.Label();
             this.labelswapc1 = new System.Windows.Forms.Label();
             this.labelswapc2 = new System.Windows.Forms.Label();
+            this.labelnewOwner = new System.Windows.Forms.Label();
+            this.labelnewPlate = new System.Windows.Forms.Label();
+            this.labelnewColor = new System.Windows.Forms.Label();
+            this.labelconnBeac = new System.Windows.Forms.Label();
+            this.labelconnCar = new System.Windows.Forms.Label();
+            this.labelnewID = new System.Windows.Forms.Label();
+            this.labelremoveCar = new System.Windows.Forms.Label();
+            this.labelremoveBeac = new System.Windows.Forms.Label();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.vScroller = new System.Windows.Forms.VScrollBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -138,7 +140,7 @@ namespace TeamVaxxers
             this.collCar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.collCar.Location = new System.Drawing.Point(0, 0);
             this.collCar.Name = "collCar";
-            this.collCar.Size = new System.Drawing.Size(1354, 35);
+            this.collCar.Size = new System.Drawing.Size(1388, 35);
             this.collCar.TabIndex = 0;
             this.collCar.Text = "Cars and Beacons";
             this.collCar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -152,7 +154,7 @@ namespace TeamVaxxers
             this.collUser.ForeColor = System.Drawing.Color.Black;
             this.collUser.Location = new System.Drawing.Point(0, 0);
             this.collUser.Name = "collUser";
-            this.collUser.Size = new System.Drawing.Size(1354, 33);
+            this.collUser.Size = new System.Drawing.Size(1388, 33);
             this.collUser.TabIndex = 0;
             this.collUser.Text = "Users";
             this.collUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -167,7 +169,7 @@ namespace TeamVaxxers
             this.collChange.ImageAlign = System.Drawing.ContentAlignment.TopRight;
             this.collChange.Location = new System.Drawing.Point(0, 0);
             this.collChange.Name = "collChange";
-            this.collChange.Size = new System.Drawing.Size(1354, 35);
+            this.collChange.Size = new System.Drawing.Size(1388, 35);
             this.collChange.TabIndex = 0;
             this.collChange.Text = "Change Password";
             this.collChange.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -222,6 +224,7 @@ namespace TeamVaxxers
             this.removeBeaconBtn.Size = new System.Drawing.Size(114, 23);
             this.removeBeaconBtn.TabIndex = 0;
             this.removeBeaconBtn.Text = "remove beacon";
+            this.removeBeaconBtn.Click += new System.EventHandler(this.removeBeaconBtn_Click);
             // 
             // addBeaconBtn
             // 
@@ -241,6 +244,7 @@ namespace TeamVaxxers
             this.modifyBtn.Size = new System.Drawing.Size(158, 23);
             this.modifyBtn.TabIndex = 0;
             this.modifyBtn.Text = "connect beacon and car";
+            this.modifyBtn.Click += new System.EventHandler(this.modifyBtn_Click);
             // 
             // swapBeaconBtn
             // 
@@ -250,15 +254,17 @@ namespace TeamVaxxers
             this.swapBeaconBtn.Size = new System.Drawing.Size(114, 23);
             this.swapBeaconBtn.TabIndex = 0;
             this.swapBeaconBtn.Text = "swap beacons";
+            this.swapBeaconBtn.Click += new System.EventHandler(this.swapBeaconBtn_Click);
             // 
             // swapCarBtn
             // 
             this.swapCarBtn.ForeColor = System.Drawing.Color.Black;
-            this.swapCarBtn.Location = new System.Drawing.Point(58, 97);
+            this.swapCarBtn.Location = new System.Drawing.Point(58, 103);
             this.swapCarBtn.Name = "swapCarBtn";
             this.swapCarBtn.Size = new System.Drawing.Size(114, 23);
             this.swapCarBtn.TabIndex = 0;
             this.swapCarBtn.Text = "swap cars";
+            this.swapCarBtn.Click += new System.EventHandler(this.swapCarBtn_Click);
             // 
             // changePassBtn
             // 
@@ -291,9 +297,11 @@ namespace TeamVaxxers
             this.splitContainer1.Panel2.Controls.Add(this.changePassBtn);
             this.splitContainer1.Panel2.Controls.Add(this.oldPassword);
             this.splitContainer1.Panel2.Controls.Add(this.newPassword);
+            this.splitContainer1.Panel2.Controls.Add(this.labelNewPass);
+            this.splitContainer1.Panel2.Controls.Add(this.labelOldPass);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(1354, 90);
+            this.splitContainer1.Size = new System.Drawing.Size(1388, 90);
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -303,7 +311,6 @@ namespace TeamVaxxers
             this.oldPassword.Name = "oldPassword";
             this.oldPassword.Size = new System.Drawing.Size(100, 20);
             this.oldPassword.TabIndex = 1;
-            this.oldPassword.Text = "Current Password";
             this.oldPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.oldPassword.TextChanged += new System.EventHandler(this.oldPassword_TextChanged);
             // 
@@ -313,9 +320,26 @@ namespace TeamVaxxers
             this.newPassword.Name = "newPassword";
             this.newPassword.Size = new System.Drawing.Size(100, 20);
             this.newPassword.TabIndex = 2;
-            this.newPassword.Text = "New Password";
             this.newPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.newPassword.TextChanged += new System.EventHandler(this.newPassword_TextChanged);
+            // 
+            // labelNewPass
+            // 
+            this.labelNewPass.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelNewPass.Location = new System.Drawing.Point(342, 0);
+            this.labelNewPass.Name = "labelNewPass";
+            this.labelNewPass.Size = new System.Drawing.Size(100, 23);
+            this.labelNewPass.TabIndex = 3;
+            this.labelNewPass.Text = "New Password";
+            // 
+            // labelOldPass
+            // 
+            this.labelOldPass.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelOldPass.Location = new System.Drawing.Point(172, 0);
+            this.labelOldPass.Name = "labelOldPass";
+            this.labelOldPass.Size = new System.Drawing.Size(100, 23);
+            this.labelOldPass.TabIndex = 4;
+            this.labelOldPass.Text = "Current Password";
             // 
             // addUserBox
             // 
@@ -323,7 +347,6 @@ namespace TeamVaxxers
             this.addUserBox.Name = "addUserBox";
             this.addUserBox.Size = new System.Drawing.Size(100, 20);
             this.addUserBox.TabIndex = 3;
-            this.addUserBox.Text = "User\'s username";
             this.addUserBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // removeUserBox
@@ -332,7 +355,6 @@ namespace TeamVaxxers
             this.removeUserBox.Name = "removeUserBox";
             this.removeUserBox.Size = new System.Drawing.Size(100, 20);
             this.removeUserBox.TabIndex = 5;
-            this.removeUserBox.Text = "User\'s username";
             this.removeUserBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.removeUserBox.TextChanged += new System.EventHandler(this.removeUserBox_TextChanged);
             // 
@@ -342,7 +364,6 @@ namespace TeamVaxxers
             this.addPassword.Name = "addPassword";
             this.addPassword.Size = new System.Drawing.Size(100, 20);
             this.addPassword.TabIndex = 4;
-            this.addPassword.Text = "User\'s Password";
             this.addPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.addPassword.TextChanged += new System.EventHandler(this.addPassword_TextChanged);
             // 
@@ -401,34 +422,30 @@ namespace TeamVaxxers
             this.addBeacon.Name = "addBeacon";
             this.addBeacon.Size = new System.Drawing.Size(100, 20);
             this.addBeacon.TabIndex = 6;
-            this.addBeacon.Text = "Beacon ID";
             this.addBeacon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // addDriver
             // 
-            this.addDriver.Location = new System.Drawing.Point(205, 62);
+            this.addDriver.Location = new System.Drawing.Point(205, 59);
             this.addDriver.Name = "addDriver";
             this.addDriver.Size = new System.Drawing.Size(100, 20);
             this.addDriver.TabIndex = 7;
-            this.addDriver.Text = "Owner\'s Name";
             this.addDriver.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // addColor
             // 
-            this.addColor.Location = new System.Drawing.Point(325, 65);
+            this.addColor.Location = new System.Drawing.Point(325, 61);
             this.addColor.Name = "addColor";
             this.addColor.Size = new System.Drawing.Size(100, 20);
             this.addColor.TabIndex = 8;
-            this.addColor.Text = "Car Color";
             this.addColor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // addPlate
             // 
-            this.addPlate.Location = new System.Drawing.Point(446, 65);
+            this.addPlate.Location = new System.Drawing.Point(446, 61);
             this.addPlate.Name = "addPlate";
             this.addPlate.Size = new System.Drawing.Size(100, 20);
             this.addPlate.TabIndex = 9;
-            this.addPlate.Text = "Car\'s Plate Number";
             // 
             // removeBeacon
             // 
@@ -436,8 +453,8 @@ namespace TeamVaxxers
             this.removeBeacon.Name = "removeBeacon";
             this.removeBeacon.Size = new System.Drawing.Size(100, 20);
             this.removeBeacon.TabIndex = 10;
-            this.removeBeacon.Text = "Beacon ID";
             this.removeBeacon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.removeBeacon.TextChanged += new System.EventHandler(this.removeBeacon_TextChanged);
             // 
             // removePlate
             // 
@@ -445,7 +462,6 @@ namespace TeamVaxxers
             this.removePlate.Name = "removePlate";
             this.removePlate.Size = new System.Drawing.Size(100, 20);
             this.removePlate.TabIndex = 11;
-            this.removePlate.Text = "Plate Number";
             this.removePlate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // conBeacon
@@ -454,7 +470,6 @@ namespace TeamVaxxers
             this.conBeacon.Name = "conBeacon";
             this.conBeacon.Size = new System.Drawing.Size(100, 20);
             this.conBeacon.TabIndex = 12;
-            this.conBeacon.Text = "Beacon ID";
             this.conBeacon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // conCar
@@ -463,15 +478,13 @@ namespace TeamVaxxers
             this.conCar.Name = "conCar";
             this.conCar.Size = new System.Drawing.Size(100, 20);
             this.conCar.TabIndex = 13;
-            this.conCar.Text = "Car\'s Plate Number";
             // 
             // newCar
             // 
-            this.newCar.Location = new System.Drawing.Point(205, 100);
+            this.newCar.Location = new System.Drawing.Point(205, 103);
             this.newCar.Name = "newCar";
             this.newCar.Size = new System.Drawing.Size(100, 20);
             this.newCar.TabIndex = 14;
-            this.newCar.Text = "Car\'s Plate";
             this.newCar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // oldCar
@@ -480,7 +493,6 @@ namespace TeamVaxxers
             this.oldCar.Name = "oldCar";
             this.oldCar.Size = new System.Drawing.Size(100, 20);
             this.oldCar.TabIndex = 15;
-            this.oldCar.Text = " Other Car\'s Plate";
             this.oldCar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // newBeacon
@@ -489,7 +501,6 @@ namespace TeamVaxxers
             this.newBeacon.Name = "newBeacon";
             this.newBeacon.Size = new System.Drawing.Size(100, 20);
             this.newBeacon.TabIndex = 16;
-            this.newBeacon.Text = "Beacon\'s ID";
             this.newBeacon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // oldBeacon
@@ -498,7 +509,6 @@ namespace TeamVaxxers
             this.oldBeacon.Name = "oldBeacon";
             this.oldBeacon.Size = new System.Drawing.Size(100, 20);
             this.oldBeacon.TabIndex = 17;
-            this.oldBeacon.Text = "Other Beacon\'s ID";
             this.oldBeacon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.oldBeacon.TextChanged += new System.EventHandler(this.oldBeacon_TextChanged);
             // 
@@ -527,12 +537,43 @@ namespace TeamVaxxers
             this.splitContainer2.Panel2.Controls.Add(this.removeUserBox);
             this.splitContainer2.Panel2.Controls.Add(this.addPassword);
             this.splitContainer2.Panel2.Controls.Add(this.ListUsers);
+            this.splitContainer2.Panel2.Controls.Add(this.labeladdUser);
+            this.splitContainer2.Panel2.Controls.Add(this.labeladdPass);
+            this.splitContainer2.Panel2.Controls.Add(this.labelremoveUser);
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer2.Size = new System.Drawing.Size(1354, 258);
+            this.splitContainer2.Size = new System.Drawing.Size(1388, 258);
             this.splitContainer2.SplitterDistance = 31;
             this.splitContainer2.TabIndex = 6;
+            // 
+            // labeladdUser
+            // 
+            this.labeladdUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labeladdUser.Location = new System.Drawing.Point(208, 19);
+            this.labeladdUser.Name = "labeladdUser";
+            this.labeladdUser.Size = new System.Drawing.Size(100, 23);
+            this.labeladdUser.TabIndex = 6;
+            this.labeladdUser.Text = "New Username";
+            this.labeladdUser.Click += new System.EventHandler(this.labeladdUser_Click);
+            // 
+            // labeladdPass
+            // 
+            this.labeladdPass.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labeladdPass.Location = new System.Drawing.Point(342, 19);
+            this.labeladdPass.Name = "labeladdPass";
+            this.labeladdPass.Size = new System.Drawing.Size(100, 23);
+            this.labeladdPass.TabIndex = 7;
+            this.labeladdPass.Text = "New User\'s Password";
+            // 
+            // labelremoveUser
+            // 
+            this.labelremoveUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelremoveUser.Location = new System.Drawing.Point(781, 19);
+            this.labelremoveUser.Name = "labelremoveUser";
+            this.labelremoveUser.Size = new System.Drawing.Size(100, 23);
+            this.labelremoveUser.TabIndex = 8;
+            this.labelremoveUser.Text = "Username";
             // 
             // splitContainer3
             // 
@@ -570,9 +611,21 @@ namespace TeamVaxxers
             this.splitContainer3.Panel2.Controls.Add(this.addBeaconBtn);
             this.splitContainer3.Panel2.Controls.Add(this.removeCarBtn);
             this.splitContainer3.Panel2.Controls.Add(this.removeBeaconBtn);
+            this.splitContainer3.Panel2.Controls.Add(this.labelswapb1);
+            this.splitContainer3.Panel2.Controls.Add(this.labelswapb2);
+            this.splitContainer3.Panel2.Controls.Add(this.labelswapc1);
+            this.splitContainer3.Panel2.Controls.Add(this.labelswapc2);
+            this.splitContainer3.Panel2.Controls.Add(this.labelnewOwner);
+            this.splitContainer3.Panel2.Controls.Add(this.labelnewPlate);
+            this.splitContainer3.Panel2.Controls.Add(this.labelnewColor);
+            this.splitContainer3.Panel2.Controls.Add(this.labelconnBeac);
+            this.splitContainer3.Panel2.Controls.Add(this.labelconnCar);
+            this.splitContainer3.Panel2.Controls.Add(this.labelnewID);
+            this.splitContainer3.Panel2.Controls.Add(this.labelremoveCar);
+            this.splitContainer3.Panel2.Controls.Add(this.labelremoveBeac);
             this.splitContainer3.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer3.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
-            this.splitContainer3.Size = new System.Drawing.Size(1354, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(1388, 371);
             this.splitContainer3.SplitterDistance = 37;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -594,6 +647,115 @@ namespace TeamVaxxers
             this.ListCars.View = System.Windows.Forms.View.Details;
             this.ListCars.SelectedIndexChanged += new System.EventHandler(this.ListCars_SelectedIndexChanged);
             // 
+            // labelswapb1
+            // 
+            this.labelswapb1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelswapb1.Location = new System.Drawing.Point(767, 84);
+            this.labelswapb1.Name = "labelswapb1";
+            this.labelswapb1.Size = new System.Drawing.Size(100, 23);
+            this.labelswapb1.TabIndex = 18;
+            this.labelswapb1.Text = "Beacon ID";
+            // 
+            // labelswapb2
+            // 
+            this.labelswapb2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelswapb2.Location = new System.Drawing.Point(922, 84);
+            this.labelswapb2.Name = "labelswapb2";
+            this.labelswapb2.Size = new System.Drawing.Size(100, 23);
+            this.labelswapb2.TabIndex = 19;
+            this.labelswapb2.Text = "Other Beacon ID";
+            // 
+            // labelswapc1
+            // 
+            this.labelswapc1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelswapc1.Location = new System.Drawing.Point(178, 91);
+            this.labelswapc1.Name = "labelswapc1";
+            this.labelswapc1.Size = new System.Drawing.Size(100, 16);
+            this.labelswapc1.TabIndex = 20;
+            this.labelswapc1.Text = "Plate";
+            // 
+            // labelswapc2
+            // 
+            this.labelswapc2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelswapc2.Location = new System.Drawing.Point(311, 91);
+            this.labelswapc2.Name = "labelswapc2";
+            this.labelswapc2.Size = new System.Drawing.Size(100, 23);
+            this.labelswapc2.TabIndex = 21;
+            this.labelswapc2.Text = "Other plate";
+            // 
+            // labelnewOwner
+            // 
+            this.labelnewOwner.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelnewOwner.Location = new System.Drawing.Point(191, 46);
+            this.labelnewOwner.Name = "labelnewOwner";
+            this.labelnewOwner.Size = new System.Drawing.Size(100, 23);
+            this.labelnewOwner.TabIndex = 22;
+            this.labelnewOwner.Text = "Owners Name";
+            // 
+            // labelnewPlate
+            // 
+            this.labelnewPlate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelnewPlate.Location = new System.Drawing.Point(431, 46);
+            this.labelnewPlate.Name = "labelnewPlate";
+            this.labelnewPlate.Size = new System.Drawing.Size(100, 23);
+            this.labelnewPlate.TabIndex = 23;
+            this.labelnewPlate.Text = "Plate Number";
+            // 
+            // labelnewColor
+            // 
+            this.labelnewColor.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelnewColor.Location = new System.Drawing.Point(311, 46);
+            this.labelnewColor.Name = "labelnewColor";
+            this.labelnewColor.Size = new System.Drawing.Size(100, 23);
+            this.labelnewColor.TabIndex = 24;
+            this.labelnewColor.Text = "Car\'s Color";
+            // 
+            // labelconnBeac
+            // 
+            this.labelconnBeac.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelconnBeac.Location = new System.Drawing.Point(191, 140);
+            this.labelconnBeac.Name = "labelconnBeac";
+            this.labelconnBeac.Size = new System.Drawing.Size(100, 23);
+            this.labelconnBeac.TabIndex = 25;
+            this.labelconnBeac.Text = "Beacon ID";
+            // 
+            // labelconnCar
+            // 
+            this.labelconnCar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelconnCar.Location = new System.Drawing.Point(311, 140);
+            this.labelconnCar.Name = "labelconnCar";
+            this.labelconnCar.Size = new System.Drawing.Size(100, 23);
+            this.labelconnCar.TabIndex = 26;
+            this.labelconnCar.Text = "Car\'s Plate";
+            // 
+            // labelnewID
+            // 
+            this.labelnewID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelnewID.Location = new System.Drawing.Point(778, 46);
+            this.labelnewID.Name = "labelnewID";
+            this.labelnewID.Size = new System.Drawing.Size(100, 23);
+            this.labelnewID.TabIndex = 27;
+            this.labelnewID.Text = "Beacon ID";
+            // 
+            // labelremoveCar
+            // 
+            this.labelremoveCar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelremoveCar.Location = new System.Drawing.Point(191, 3);
+            this.labelremoveCar.Name = "labelremoveCar";
+            this.labelremoveCar.Size = new System.Drawing.Size(100, 23);
+            this.labelremoveCar.TabIndex = 28;
+            this.labelremoveCar.Text = "Car\'s Plate";
+            // 
+            // labelremoveBeac
+            // 
+            this.labelremoveBeac.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelremoveBeac.Location = new System.Drawing.Point(753, 6);
+            this.labelremoveBeac.Name = "labelremoveBeac";
+            this.labelremoveBeac.Size = new System.Drawing.Size(100, 20);
+            this.labelremoveBeac.TabIndex = 29;
+            this.labelremoveBeac.Text = "Beacon ID";
+            this.labelremoveBeac.Click += new System.EventHandler(this.labelremoveBeac_Click);
+            // 
             // splitContainer4
             // 
             this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -614,7 +776,7 @@ namespace TeamVaxxers
             this.splitContainer4.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer4.Panel2Collapsed = true;
             this.splitContainer4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer4.Size = new System.Drawing.Size(1354, 94);
+            this.splitContainer4.Size = new System.Drawing.Size(1388, 94);
             this.splitContainer4.SplitterDistance = 69;
             this.splitContainer4.TabIndex = 6;
             // 
@@ -634,7 +796,7 @@ namespace TeamVaxxers
             this.AutoScrollMargin = new System.Drawing.Size(1, 1);
             this.AutoScrollMinSize = new System.Drawing.Size(1, 1);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1371, 653);
+            this.ClientSize = new System.Drawing.Size(1405, 653);
             this.Controls.Add(this.splitContainer4);
             this.Controls.Add(this.splitContainer3);
             this.Controls.Add(this.splitContainer2);
@@ -716,6 +878,8 @@ namespace TeamVaxxers
         private System.Windows.Forms.Label labelswapc2;
         private System.Windows.Forms.Label labelconnCar;
         private System.Windows.Forms.Label labelconnBeac;
+        private System.Windows.Forms.Label labelremoveCar;
+        private System.Windows.Forms.Label labelremoveBeac;
 
 
 

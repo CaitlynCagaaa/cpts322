@@ -317,6 +317,7 @@ namespace TeamVaxxers
                 ListCars.Items.Remove(ListCars.FindItemWithText(removePlate.Text, true, 0, false));
 
                 addCarFirebase();
+                removePlate.Clear();
             }
             else
             {
@@ -328,6 +329,7 @@ namespace TeamVaxxers
                 newList.SubItems.Add(Convert.ToString(check));
                 ListCars.Items.Add(newList);
                 addCarFirebase();
+                addBeaconFirebase();
                 removePlate.Clear();
 
 
@@ -393,6 +395,131 @@ namespace TeamVaxxers
                 
                 oldPassword.Clear();
                 newPassword.Clear();
+
+            }
+        }
+
+        private void labeladdUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelremoveBeac_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeBeacon_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeBeaconBtn_Click(object sender, EventArgs e)
+        {
+           int check = beaconList.removeBeacon(Convert.ToInt32(removeBeacon.Text),Cars);
+            if(check==-1)
+            {
+                MessageBox.Show("Beacon with ID " + removeBeacon.Text + " does not exist");
+
+            }
+            else if (check == -2)
+            {
+                ListCars.Items.Remove(ListCars.FindItemWithText(removeBeacon.Text, true, 0, false));
+
+                addBeaconFirebase();
+                removeBeacon.Clear();
+            }
+            else
+            {
+                ListViewItem newList = ListCars.FindItemWithText(removeBeacon.Text, true, 0, false);
+                //only car is removed so need to put the beacon id in 
+                newList.SubItems[3].Text = Convert.ToString (-1);
+                addBeaconFirebase();
+                removeBeacon.Clear();
+
+
+
+
+
+            }
+        }
+
+        private void swapBeaconBtn_Click(object sender, EventArgs e)
+        {
+            int check = beaconList.modify(Convert.ToInt32(newBeacon.Text), Convert.ToInt32(oldBeacon.Text), Cars);
+            if(check==-1)
+            {
+                MessageBox.Show("Beacon with ID " + newBeacon.Text + " does not exist");
+            }
+            else if(check==-2)
+            {
+                MessageBox.Show("Beacon with ID " + oldBeacon.Text + " does not exist");
+            }
+            else
+            {
+                ListViewItem newList = ListCars.FindItemWithText(newBeacon.Text, true, 0, false);
+                ListViewItem newList1 = ListCars.FindItemWithText(oldBeacon.Text, true, 0, false);
+                newList.SubItems[3].Text = Convert.ToString(oldBeacon.Text);
+                newList1.SubItems[3].Text = Convert.ToString(newBeacon.Text);
+                addBeaconFirebase();
+                addCarFirebase();
+                newBeacon.Clear();
+                oldBeacon.Clear();
+
+            }
+        }
+
+        private void swapCarBtn_Click(object sender, EventArgs e)
+        {
+            int check = Cars.modify(beaconList, newCar.Text, oldCar.Text);
+            if (check == -1)
+            {
+                MessageBox.Show("Car with plate " + newCar.Text + " does not exist");
+            }
+            else if (check == -2)
+            {
+                MessageBox.Show("Car with plate " + oldCar.Text + " does not exist");
+            }
+            else
+            {
+                ListViewItem newList = ListCars.FindItemWithText(newCar.Text, true, 0, false);
+                ListViewItem newList1 = ListCars.FindItemWithText(oldCar.Text, true, 0, false);
+                string one = newList.SubItems[3].Text;
+                string two = newList1.SubItems[3].Text;
+                newList.SubItems[3].Text = two;
+                newList1.SubItems[3].Text = one;
+                addBeaconFirebase();
+                addCarFirebase();
+                newCar.Clear();
+                oldCar.Clear();
+
+            }
+
+        }
+
+        private void modifyBtn_Click(object sender, EventArgs e)
+        {
+            int check = Cars.connect(beaconList, Convert.ToInt32(conBeacon.Text), conCar.Text);
+            if (check == -1)
+            {
+                MessageBox.Show("Car with plate " + conCar.Text + " does not exist");
+            }
+            else if (check == -2)
+            {
+                MessageBox.Show("Beacon with ID " + conBeacon.Text + " does not exist");
+            }
+            else
+            {
+                ListViewItem newList = ListCars.FindItemWithText(conCar.Text, true, 0, false);
+                ListCars.Items.Remove(ListCars.FindItemWithText(conBeacon.Text, true, 0, false));
+          
+                
+                newList.SubItems[3].Text = conBeacon.Text;
+                
+                addBeaconFirebase();
+                addCarFirebase();
+                conCar.Clear();
+                conBeacon.Clear();
 
             }
         }

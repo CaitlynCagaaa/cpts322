@@ -87,31 +87,34 @@ namespace TeamVaxxers
         public int removeBeacon(int id, CarList list)
         {
             int i = 0;
+            int ret = -1;
             foreach (var b1 in this.data)
             {
                 i++;
                 
                 if (b1.Id == id)
                 {
-                    if(b1.connected!=null)
+                    ret = 0;
+                    if(b1.connected!=null || b1.connected != "")
                     {
                         foreach( var car1 in list.data)
                         {
                             if(b1.connected ==car1.plate)
                             {
                                 car1.connected = -1;
+                                ret = -2;
                             }
                         }
                     }
                     this.data.Remove(b1);
                     this.Total--;
-                    return 0;
+                    return ret;
                 }
 
 
 
             }
-            return -1;
+            return ret;
 
 
         
@@ -368,6 +371,8 @@ namespace TeamVaxxers
                             if (b1.Id == car1.connected)
                             {
                                 b1.connected = null;
+                                this.data.Remove(car1);
+                                this.Total--;
                                 return b1.Id;
                             }
                         }
@@ -390,8 +395,8 @@ namespace TeamVaxxers
         public int connect(Beacons list, int id, string plate)
         {
             int check =-1;
-            Car temp;
-            Beacon temp1;
+            //Car temp;
+            //Beacon temp1;
             foreach (var c1 in this.data)
             {
                 if(c1.plate==plate)
@@ -406,7 +411,7 @@ namespace TeamVaxxers
             }
             if(check==-1)
             {
-                return -1;
+                return -1;// if car doesnt exist
             }
             foreach (var b1 in list.data)
             {
@@ -434,7 +439,7 @@ namespace TeamVaxxers
 
             }
 
-            return -2;
+            return -2;// if beacon doesnt exist 
             
             
 
