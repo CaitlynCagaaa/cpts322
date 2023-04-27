@@ -20,8 +20,8 @@ namespace TeamVaxxers
 {
     public partial class ParkingLot : Form
     {
-        //FirebaseClient client = new FirebaseClient("https://heymotocarro-1a1d4.firebaseio.com/");
-        FirebaseClient client = new FirebaseClient(" https://parking-lot-f206b-default-rtdb.firebaseio.com/");
+        FirebaseClient client = new FirebaseClient("https://heymotocarro-1a1d4.firebaseio.com/");
+        //FirebaseClient client = new FirebaseClient(" https://parking-lot-f206b-default-rtdb.firebaseio.com/");
  
          Graphics G;
         Rectangle[] rect= new Rectangle[6];
@@ -97,12 +97,12 @@ namespace TeamVaxxers
                 }
                 else
                 {
-                    MessageBox.Show("low latency on firebase, resart for accurate dispaly");
+                    MessageBox.Show("low latency on firebase, may take a few seconds");
                 }
             }
             else
             {
-                MessageBox.Show("low latency on firebase, resart for accurate display");
+                MessageBox.Show("low latency on firebase, rmay take a few seconds");
             }
             
             //call parking lot method to check for filled slots

@@ -322,7 +322,7 @@ namespace TeamVaxxers
             {
                 ListCars.Items.Remove(ListCars.FindItemWithText(removePlate.Text));
                 //only car is removed so need to put the beacon id in 
-                ListViewItem newList = new ListViewItem("~");
+                ListViewItem newList = new ListViewItem("*");
                 newList.SubItems.Add((""));
                 newList.SubItems.Add((""));
                 newList.SubItems.Add(Convert.ToString(check));
