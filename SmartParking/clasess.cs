@@ -14,6 +14,8 @@ namespace TeamVaxxers
         public long Time { get; set; }
         public string connected;
         public int inside;
+        /*•	Uses the trilateration algorithm, D1,D2,D3,D4 and a instance of the Sensors 
+         * class to calculate the position of the beacon and ruturn it as a point.*/
         public Point trilateratetion(Sensors location)
         {
             Point pt = new Point();
