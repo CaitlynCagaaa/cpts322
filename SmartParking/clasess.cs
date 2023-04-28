@@ -16,6 +16,13 @@ namespace TeamVaxxers
         public int inside;
         public Point trilateratetion(Sensors location)
         {
+            Point pt = new Point();
+            if (D1<0 || D2 < 0 || D3 < 0 || D4 < 0)
+            {
+                pt.x = -1;
+                pt.y = -1;
+                return pt;
+            }
             //do trlateration for specific pt here 
             double A =Math.Abs( 2 * location.data[1].position.x - 2 * location.data[0].position.x);
             double B = Math.Abs( 2 * location.data[1].position.y - 2 * location.data[0].position.y);
@@ -36,7 +43,7 @@ namespace TeamVaxxers
                 (location.data[3].position.x * location.data[3].position.x) - (location.data[2].position.y * location.data[2].position.y)
                 + (location.data[3].position.y * location.data[3].position.y));
 
-            Point pt = new Point();
+            
             double x1 = ((C*E -F*B)/ (E*A - B*D));
             double y1 = ((C * D - F * A) / (B * D - A * E));
             //double x2 = ((C * H- I * B) / (H * A - B * G));
@@ -137,14 +144,16 @@ namespace TeamVaxxers
                             b1.connected = null;
                             string temp1 = b2.connected;
                             b2.connected = null;
+                            b2.connected = temp;
+                            b1.connected = temp1;
 
-                                
+
                             foreach (var car1 in list.data)// switch cars id for b1
                             {
                                 if (temp == car1.plate)
                                 {
                                     car1.connected = b2.Id;
-                                    b2.connected = temp;
+                                    
                                         
                                 }
                                     
@@ -154,7 +163,7 @@ namespace TeamVaxxers
                                 if (temp1 == car1.plate)
                                 {
                                     car1.connected = b1.Id;
-                                    b2.connected = temp1;
+                                    
 
                                 }
 
@@ -402,8 +411,20 @@ namespace TeamVaxxers
                 if(c1.plate==plate)
                 {
                     check = 1;
-                    
-                    c1.connected = id;
+                    if (c1.connected == -1)
+                    {
+                        c1.connected = id;
+                    }
+                    else
+                    {
+                        return -3;
+                    }
+
+                        
+                }
+                else if(c1.connected==id)
+                {
+                    return -3;
                 }
                
 
@@ -413,6 +434,7 @@ namespace TeamVaxxers
             {
                 return -1;// if car doesnt exist
             }
+            check = -1;
             foreach (var b1 in list.data)
             {
                 if (b1.Id == id)
@@ -463,24 +485,35 @@ namespace TeamVaxxers
                             c1.connected = -1;
                             long temp1 = c2.connected;
                             c2.connected = -1;
+                            c2.connected = temp;
+                            c1.connected = temp1;
 
-
+                            int check = 0;
                             foreach (var beacon in list.data)// switch cars id for b1
                             {
                                 if (temp == beacon.Id)
                                 {
-                                    beacon.connected = c1.plate;
-                                    c2.connected = temp;
+                                    beacon.connected = c2.plate;
+                                    check = 1;
+                                    
 
                                 }
 
                             }
+                            
                             foreach (var beacon in list.data)//swirch cars id for b2
                             {
                                 if (temp1 == beacon.Id)
                                 {
-                                    beacon.connected = c2.plate;
-                                    c1.connected = temp1;
+                                    if (check == 1)
+                                    {
+                                        beacon.connected = "";
+                                    }
+                                    else
+                                    {
+                                        beacon.connected = c1.plate;
+                                    }
+                                    
 
                                 }
 

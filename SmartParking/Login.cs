@@ -20,12 +20,13 @@ namespace TeamVaxxers
 
             int checkCred = userSet.validate(name, pws);
 
-            if (checkCred == 1)
+            if (checkCred != -1)
             {
                 this.Hide();
                 User current = new User();
                 current.UserName = name;
                 current.Password = pws;
+                current.level = checkCred;
                 ParkingLot engine = new ParkingLot();
                 engine.setUser(current);
                 engine.setUsers(userSet);

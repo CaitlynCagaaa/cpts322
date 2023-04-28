@@ -84,7 +84,7 @@ namespace TeamVaxxers
 
             //draw parking numbers
         }
-        private void trilaterate(Beacon beacon)
+        private int trilaterate(Beacon beacon)
         {
 
             if (sense != null)
@@ -97,17 +97,18 @@ namespace TeamVaxxers
                 }
                 else
                 {
-                    MessageBox.Show("low latency on firebase, may take a few seconds");
+                    return -1;
                 }
             }
             else
             {
-                MessageBox.Show("low latency on firebase, rmay take a few seconds");
+                return -1;
             }
             
             //call parking lot method to check for filled slots
             
             this.Paint += repaint;
+            return 0;
             
             //repaint
         }
@@ -156,7 +157,7 @@ namespace TeamVaxxers
             SolidBrush myBrush = new SolidBrush(Color.FloralWhite);
             SolidBrush myBrush2 = new SolidBrush(Color.YellowGreen);
 
-
+            
             // Create rectangle and Draw rectangle to screen.
             for (int i = 0; i < 3; i++)
             {
@@ -189,11 +190,15 @@ namespace TeamVaxxers
                .OnceSingleAsync<Beacons>();
             displayBeaconsData(BeaconsSet);
 
-            
+            int checkDataLoaded = -1;
 
             foreach(var beac in BeaconsSet.data)
             {
-                trilaterate(beac);
+                while (checkDataLoaded == -1)
+                {
+                    checkDataLoaded =trilaterate(beac);
+                }
+                checkDataLoaded = -1;
             }
 
 

@@ -37,7 +37,14 @@ namespace TeamVaxxers
             {
                 if (user1.UserName == name && user1.Password == psw)
                 {
-                    return 1;
+                    if (user1.level == 1)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
 
             }

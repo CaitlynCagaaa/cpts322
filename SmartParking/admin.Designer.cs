@@ -140,7 +140,7 @@ namespace TeamVaxxers
             this.collCar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.collCar.Location = new System.Drawing.Point(0, 0);
             this.collCar.Name = "collCar";
-            this.collCar.Size = new System.Drawing.Size(1388, 35);
+            this.collCar.Size = new System.Drawing.Size(1405, 35);
             this.collCar.TabIndex = 0;
             this.collCar.Text = "Cars and Beacons";
             this.collCar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -154,7 +154,7 @@ namespace TeamVaxxers
             this.collUser.ForeColor = System.Drawing.Color.Black;
             this.collUser.Location = new System.Drawing.Point(0, 0);
             this.collUser.Name = "collUser";
-            this.collUser.Size = new System.Drawing.Size(1388, 33);
+            this.collUser.Size = new System.Drawing.Size(1405, 33);
             this.collUser.TabIndex = 0;
             this.collUser.Text = "Users";
             this.collUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -169,7 +169,7 @@ namespace TeamVaxxers
             this.collChange.ImageAlign = System.Drawing.ContentAlignment.TopRight;
             this.collChange.Location = new System.Drawing.Point(0, 0);
             this.collChange.Name = "collChange";
-            this.collChange.Size = new System.Drawing.Size(1388, 35);
+            this.collChange.Size = new System.Drawing.Size(1405, 35);
             this.collChange.TabIndex = 0;
             this.collChange.Text = "Change Password";
             this.collChange.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -301,7 +301,7 @@ namespace TeamVaxxers
             this.splitContainer1.Panel2.Controls.Add(this.labelOldPass);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(1388, 90);
+            this.splitContainer1.Size = new System.Drawing.Size(1405, 90);
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -543,7 +543,7 @@ namespace TeamVaxxers
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer2.Size = new System.Drawing.Size(1388, 258);
+            this.splitContainer2.Size = new System.Drawing.Size(1405, 258);
             this.splitContainer2.SplitterDistance = 31;
             this.splitContainer2.TabIndex = 6;
             // 
@@ -625,7 +625,7 @@ namespace TeamVaxxers
             this.splitContainer3.Panel2.Controls.Add(this.labelremoveBeac);
             this.splitContainer3.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer3.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
-            this.splitContainer3.Size = new System.Drawing.Size(1388, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(1405, 371);
             this.splitContainer3.SplitterDistance = 37;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -776,7 +776,7 @@ namespace TeamVaxxers
             this.splitContainer4.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer4.Panel2Collapsed = true;
             this.splitContainer4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer4.Size = new System.Drawing.Size(1388, 94);
+            this.splitContainer4.Size = new System.Drawing.Size(1405, 94);
             this.splitContainer4.SplitterDistance = 69;
             this.splitContainer4.TabIndex = 6;
             // 
@@ -796,10 +796,13 @@ namespace TeamVaxxers
             this.AutoScrollMargin = new System.Drawing.Size(1, 1);
             this.AutoScrollMinSize = new System.Drawing.Size(1, 1);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1405, 653);
+            this.ClientSize = new System.Drawing.Size(1422, 653);
             this.Controls.Add(this.splitContainer4);
-            this.Controls.Add(this.splitContainer3);
-            this.Controls.Add(this.splitContainer2);
+            if (current.level == 1)// if user is admin
+            {
+                this.Controls.Add(this.splitContainer3);
+                this.Controls.Add(this.splitContainer2);
+            }
             this.Controls.Add(this.splitContainer1);
             this.Name = "admin";
             this.Text = "Admin settings";
